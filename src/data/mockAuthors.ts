@@ -1,0 +1,60 @@
+import { Author } from "@/types/news";
+
+export const MOCK_AUTHORS: Record<string, Author> = {
+  rajesh_sharma: {
+    id: "auth-1",
+    name: "डॉ. राजेश शर्मा",
+    slug: "rajesh-sharma",
+    role: "प्रधान संपादक (Editor-in-Chief)",
+    bio: "भारतीय राजनीति, संवैधानिक मामलों और विदेश नीति पर 25 वर्षों से अधिक का खोजी पत्रकारिता का अनुभव।",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80",
+  },
+  anjali_singh: {
+    id: "auth-2",
+    name: "अंजलि सिंह",
+    slug: "anjali-singh",
+    role: "वरिष्ठ राजनीतिक संवाददाता (Senior Political Editor)",
+    bio: "संसद भवन, राष्ट्रीय चुनावों और प्रमुख राजनीतिक दलों की अंदरूनी कार्यप्रणाली की प्रमुख विश्लेषक।",
+    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&auto=format&fit=crop&q=80",
+  },
+  vivek_mishra: {
+    id: "auth-3",
+    name: "विवेक मिश्रा",
+    slug: "vivek-mishra",
+    role: "व्यापार एवं अर्थशास्त्र प्रमुख (Business Editor)",
+    bio: "भारतीय रिजर्व बैंक, कॉर्पोरेट वित्तीय नीतियां, स्टॉक मार्केट और स्टार्टअप इकोसिस्टम के विशेषज्ञ।",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80",
+  },
+  neha_verma: {
+    id: "auth-4",
+    name: "नेहा वर्मा",
+    slug: "neha-verma",
+    role: "खेल डेस्क प्रभारी (Sports Desk Lead)",
+    bio: "आईसीसी टूर्नामेंट्स, ओलंपिक और भारतीय घरेलू क्रिकेट पर गहरी नज़र रखने वाली वरिष्ठ खेल पत्रकार।",
+    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&auto=format&fit=crop&q=80",
+  },
+  amit_prakash: {
+    id: "auth-5",
+    name: "अमित प्रकाश",
+    slug: "amit-prakash",
+    role: "प्रौद्योगिकी एवं विज्ञान संवाददाता (Tech Correspondent)",
+    bio: "आर्टिफिशियल इंटेलिजेंस, डिजिटल प्राइवेसी, स्मार्टफोन और अंतरिक्ष मिशनों के तकनीकी विश्लेषक।",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80",
+  },
+  pooja_chaudhary: {
+    id: "auth-6",
+    name: "पूजा चौधरी",
+    slug: "pooja-chaudhary",
+    role: "कला एवं सिनेमा विश्लेषक (Culture & Cinema Editor)",
+    bio: "सिनेमा, ओटीटी शोज, थिएटर और भारतीय सांस्कृतिक विरासत पर विस्तृत समीक्षाएं लिखने वाली पत्रकार।",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&auto=format&fit=crop&q=80",
+  },
+  ramgopal_yadav: {
+    id: "auth-7",
+    name: "रामगोपाल यादव",
+    slug: "ramgopal-yadav",
+    role: "कृषि व ग्रामीण विकास विशेषज्ञ (Agriculture Specialist)",
+    bio: "ग्रामीण अर्थव्यवस्था, किसान कल्याण, फसल तकनीक और जल प्रबंधन पर जमीनी रिपोर्टिंग का अनुभव।",
+    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&auto=format&fit=crop&q=80",
+  },
+};

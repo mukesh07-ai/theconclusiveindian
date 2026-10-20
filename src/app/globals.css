@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-navy: #233768;
+    --color-navy-dark: #18274b;
+    --color-navy-light: #2f4886;
+    --color-red: #E52532;
+    --color-red-dark: #b81722;
+    --color-dark: #20242C;
+    --color-muted: #6B7280;
+    --color-page-bg: #FFFFFF;
+    --color-section-bg: #F5F6F8;
+    --color-border: #E5E7EB;
+  }
+
+  html {
+    font-family: var(--font-noto-devanagari), var(--font-inter), system-ui, -apple-system, sans-serif;
+    color: var(--color-dark);
+    background-color: var(--color-page-bg);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Prevent Hindi text clipping and ensure proper line height for Devanagari matras */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.35;
+    word-break: break-word;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    line-height: 1.75;
+  }
+}
+
+/* Hide scrollbars for horizontal touch scrolling strips while maintaining scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Ticker marquee animation */
+@keyframes tickerSlide {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: tickerSlide 45s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker {
+    animation: none;
+  }
+}
