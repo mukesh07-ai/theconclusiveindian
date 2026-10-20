@@ -30,7 +30,7 @@ export function PhotoGallerySection({ photos }: PhotoGallerySectionProps) {
             key={item.id}
             className="group relative rounded-xl overflow-hidden aspect-16/10 bg-gray-900 shadow-xs"
           >
-            <Link href={`/news/${item.slug}`} className="block w-full h-full">
+            <Link href={`/news/${item.slug}`} className="relative block w-full h-full">
               <ImageWithFallback
                 src={item.thumbnail}
                 alt={item.title}

@@ -15,14 +15,17 @@ export function FeaturedStoryLead({ article }: FeaturedStoryLeadProps) {
   return (
     <article className="group bg-white rounded-xl overflow-hidden border border-gray-200/80 shadow-xs hover:shadow-lg transition-all duration-300">
       {/* Mobile view: Image with bottom dark gradient overlay containing badge and headline */}
-      <div className="md:hidden relative aspect-16/10 w-full overflow-hidden bg-gray-900">
-        <Link href={`/news/${article.slug}`}>
+      <div className="md:hidden">
+        <Link
+          href={`/news/${article.slug}`}
+          className="relative block aspect-16/10 w-full overflow-hidden bg-gray-900"
+        >
           <ImageWithFallback
             src={article.featuredImage}
             alt={article.imageAlt || article.title}
             fill
             priority
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, 750px"
             className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-4">
