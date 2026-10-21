@@ -38,7 +38,7 @@ export function TopUtilityBar() {
         <div className="hidden lg:flex items-center gap-2 overflow-hidden text-[11px]">
           <span className="font-bold text-[#E52532] flex items-center gap-1 shrink-0">
             <TrendingUp className="w-3.5 h-3.5" />
-            <span>{t("ट्रेंडिंग:", "Trending:")}</span>
+            <span suppressHydrationWarning>{t("ट्रेंडिंग:", "Trending:")}</span>
           </span>
           <div className="flex items-center gap-2 truncate">
             {SITE_CONFIG.trendingTopics.map((topic, idx) => (
@@ -63,7 +63,7 @@ export function TopUtilityBar() {
             className="flex items-center gap-1 text-white hover:text-red-400 font-semibold transition-colors"
           >
             <Radio className="w-3.5 h-3.5 text-[#E52532] animate-pulse" />
-            <span>{t("लाइव टीवी", "Live TV")}</span>
+            <span suppressHydrationWarning>{t("लाइव टीवी", "Live TV")}</span>
           </Link>
           <span className="text-gray-600">|</span>
           <Link
@@ -71,7 +71,7 @@ export function TopUtilityBar() {
             className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors"
           >
             <FileText className="w-3.5 h-3.5" />
-            <span>{t("ई-पेपर", "E-Paper")}</span>
+            <span suppressHydrationWarning>{t("ई-पेपर", "E-Paper")}</span>
           </Link>
           <span className="text-gray-600">|</span>
           {/* Language Selector Pill */}

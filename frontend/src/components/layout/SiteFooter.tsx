@@ -10,7 +10,7 @@ import { useLanguage } from "@/context/LanguageContext";
 export function SiteFooter() {
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterSuccess, setNewsletterSuccess] = useState(false);
-  const { language, t } = useLanguage();
+  const { t } = useLanguage();
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,7 +82,7 @@ export function SiteFooter() {
   ];
 
   return (
-    <footer className="w-full bg-[#18274b] text-white border-t-4 border-[#E01F26] mt-10">
+    <footer className="w-full bg-[#18274b] text-white border-t-4 border-[#E01F26] mt-10" suppressHydrationWarning>
       {/* Top Banner: Brand + Social Icons + Newsletter */}
       <div className="max-w-7xl mx-auto px-4 py-8 border-b border-white/10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
@@ -181,9 +181,10 @@ export function SiteFooter() {
                 <li key={c.id}>
                   <Link
                     href={`/category/${c.slug}`}
+                    suppressHydrationWarning
                     className="hover:text-white hover:underline transition-colors"
                   >
-                    {language === "en" ? c.englishName : c.name}
+                    <span suppressHydrationWarning>{t(c.name, c.englishName)}</span>
                   </Link>
                 </li>
               ))}
@@ -192,7 +193,7 @@ export function SiteFooter() {
 
           {/* Column 2: More Categories */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-3 border-l-2 border-[#E01F26] pl-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-3 border-l-2 border-[#E01F26] pl-2" suppressHydrationWarning>
               {t("विशेष अनुभाग", "Special Sections")}
             </h4>
             <ul className="space-y-1.5 text-xs text-gray-300">
@@ -200,9 +201,10 @@ export function SiteFooter() {
                 <li key={c.id}>
                   <Link
                     href={`/category/${c.slug}`}
+                    suppressHydrationWarning
                     className="hover:text-white hover:underline transition-colors"
                   >
-                    {language === "en" ? c.englishName : c.name}
+                    <span suppressHydrationWarning>{t(c.name, c.englishName)}</span>
                   </Link>
                 </li>
               ))}

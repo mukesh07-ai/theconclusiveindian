@@ -30,7 +30,7 @@ export function BreakingNewsTicker({
   variant = "standalone",
   className,
 }: BreakingNewsTickerProps) {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const [isPaused, setIsPaused] = useState(false);
 
   // Combine breaking items and trending items into an alternating, rich ticker feed
@@ -56,14 +56,14 @@ export function BreakingNewsTicker({
           id: `trend-${tr.id || i}`,
           title: tr.title,
           slug: tr.slug,
-          category: language === "en" ? tr.category?.englishName || "Trending" : tr.category?.name || "ट्रेंडिंग",
+          category: t(tr.category?.name || "ट्रेंडिंग", tr.category?.englishName || "Trending"),
           type: "trending",
         });
       }
     }
 
     return result;
-  }, [items, breakingItems, trendingItems, language]);
+  }, [items, breakingItems, trendingItems, t]);
 
   if (combinedItems.length === 0) return null;
 
@@ -75,6 +75,7 @@ export function BreakingNewsTicker({
     return (
       <div
         aria-label={t("ताज़ा और ट्रेंडिंग समाचार टिकर", "Breaking and Trending News Ticker")}
+        suppressHydrationWarning
         className={cn(
           "relative flex items-center h-10 w-full bg-[#F8FAFC] hover:bg-[#F1F5F9] transition-colors rounded-full border border-gray-200/90 shadow-2xs px-2.5 py-1 select-none overflow-hidden group",
           className
@@ -88,7 +89,7 @@ export function BreakingNewsTicker({
           </span>
           <span className="flex items-center gap-1 font-black">
             <Zap className="w-3 h-3 fill-current text-yellow-300" />
-            <span>{t("ताज़ा", "Live")}</span>
+            <span suppressHydrationWarning>{t("ताज़ा", "Live")}</span>
           </span>
         </div>
 
@@ -134,12 +135,12 @@ export function BreakingNewsTicker({
                     {isBreaking ? (
                       <>
                         <Zap className="w-2.5 h-2.5 fill-current text-[#E01F26]" />
-                        <span>{t("ब्रेकिंग", "Breaking")}</span>
+                        <span suppressHydrationWarning>{t("ब्रेकिंग", "Breaking")}</span>
                       </>
                     ) : (
                       <>
                         <Flame className="w-2.5 h-2.5 fill-current text-amber-500" />
-                        <span>{t("ट्रेंडिंग", "Trending")}</span>
+                        <span suppressHydrationWarning>{t("ट्रेंडिंग", "Trending")}</span>
                       </>
                     )}
                   </span>
@@ -169,6 +170,7 @@ export function BreakingNewsTicker({
           onClick={() => setIsPaused((prev) => !prev)}
           aria-label={isPaused ? t("टिकर प्ले करें", "Play ticker") : t("टिकर रोकें", "Pause ticker")}
           title={isPaused ? t("टिकर प्ले करें", "Play ticker") : t("टिकर रोकें", "Pause ticker")}
+          suppressHydrationWarning
           className="shrink-0 ml-1.5 p-1 text-gray-400 hover:text-gray-700 hover:bg-gray-200/60 rounded-full transition-colors cursor-pointer"
         >
           {isPaused ? <Play className="w-3 h-3 text-[#E01F26]" /> : <Pause className="w-3 h-3" />}
@@ -182,6 +184,7 @@ export function BreakingNewsTicker({
     return (
       <aside
         aria-label={t("ताज़ा समाचार टिकर", "Live News Ticker")}
+        suppressHydrationWarning
         className={cn(
           "flex items-center h-7 bg-[#E01F26] text-white text-[11px] px-2 select-none overflow-hidden border-b border-[#b81722]",
           className
@@ -192,7 +195,7 @@ export function BreakingNewsTicker({
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-300 opacity-80" />
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-yellow-300" />
           </span>
-          <span className="uppercase">{t("लाइव", "Live")}</span>
+          <span className="uppercase" suppressHydrationWarning>{t("लाइव", "Live")}</span>
         </div>
 
         <div
@@ -245,10 +248,10 @@ export function BreakingNewsTicker({
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-300 opacity-80" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-yellow-300" />
           </span>
-          <span className="hidden xs:inline">
+          <span className="hidden xs:inline" suppressHydrationWarning>
             {t("ताज़ा व ट्रेंडिंग", "Breaking & Trending")}
           </span>
-          <span className="xs:hidden">
+          <span className="xs:hidden" suppressHydrationWarning>
             {t("ताज़ा", "Live")}
           </span>
         </div>
@@ -297,12 +300,12 @@ export function BreakingNewsTicker({
                     {isBreaking ? (
                       <>
                         <Zap className="w-2.5 h-2.5 fill-current text-yellow-300" />
-                        <span>{t("ब्रेकिंग", "Breaking")}</span>
+                        <span suppressHydrationWarning>{t("ब्रेकिंग", "Breaking")}</span>
                       </>
                     ) : (
                       <>
                         <Flame className="w-2.5 h-2.5 fill-current text-amber-200" />
-                        <span>{t("ट्रेंडिंग", "Trending")}</span>
+                        <span suppressHydrationWarning>{t("ट्रेंडिंग", "Trending")}</span>
                       </>
                     )}
                   </span>

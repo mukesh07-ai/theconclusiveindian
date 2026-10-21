@@ -23,14 +23,15 @@ export function FloatingCallButton() {
     greeting
   )}`;
 
-  const label =
-    language === "en"
-      ? chatConfig.englishLabel || "WhatsApp Chat"
-      : chatConfig.label || "व्हाट्सएप चैट";
+  const label = t(
+    chatConfig.label || "व्हाट्सएप चैट",
+    chatConfig.englishLabel || "WhatsApp Chat"
+  );
 
   return (
     <aside
       aria-label={t("व्हाट्सएप पर सहायता व चैट", "WhatsApp Help & Chat")}
+      suppressHydrationWarning
       className="fixed bottom-24 right-4 sm:bottom-28 sm:right-6 z-50 transition-all duration-300"
       style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
     >
@@ -38,6 +39,7 @@ export function FloatingCallButton() {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
+        suppressHydrationWarning
         className="group flex items-center gap-2.5 bg-[#25D366] hover:bg-[#20ba5a] active:scale-95 text-white pl-3.5 pr-4 py-2.5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-200 border-2 border-white select-none cursor-pointer"
         title={t("व्हाट्सएप पर तुरंत संदेश भेजें", "Send a message on WhatsApp")}
         aria-label={t("व्हाट्सएप पर तुरंत संदेश भेजें", "Send a message on WhatsApp")}
@@ -58,7 +60,7 @@ export function FloatingCallButton() {
         </svg>
 
         {/* WhatsApp Chat Label */}
-        <span className="text-xs sm:text-sm font-bold tracking-wide whitespace-nowrap">
+        <span className="text-xs sm:text-sm font-bold tracking-wide whitespace-nowrap" suppressHydrationWarning>
           {label}
         </span>
       </a>

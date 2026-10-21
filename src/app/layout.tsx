@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { Noto_Sans_Devanagari, Inter } from "next/font/google";
 import "./globals.css";
 import { SITE_CONFIG } from "@/config/site";
@@ -90,13 +89,12 @@ export default async function RootLayout({
   return (
     <html
       lang="hi"
+      suppressHydrationWarning
       className={`${notoSansDevanagari.variable} ${inter.variable} antialiased`}
     >
       <body className="min-h-screen flex flex-col bg-white text-[#20242C]">
         <LanguageProvider>
-          <Suspense fallback={<div className="h-20 bg-white border-b border-gray-200" />}>
-            <SiteHeader breakingNews={breakingNews} trendingArticles={trendingArticles} />
-          </Suspense>
+          <SiteHeader breakingNews={breakingNews} trendingArticles={trendingArticles} />
           <main className="flex-1">{children}</main>
           <SiteFooter />
           <FloatingCallButton />

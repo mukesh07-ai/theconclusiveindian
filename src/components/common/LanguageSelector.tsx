@@ -18,6 +18,7 @@ export function LanguageSelector({ variant = "pill", className }: LanguageSelect
         <button
           type="button"
           onClick={() => setLanguage("hi")}
+          suppressHydrationWarning
           className={cn(
             "flex-1 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer touch-manipulation",
             language === "hi"
@@ -27,11 +28,12 @@ export function LanguageSelector({ variant = "pill", className }: LanguageSelect
           aria-label="हिंदी भाषा चुनें"
         >
           <span>🇮🇳</span>
-          <span>हिंदी (Hindi)</span>
+          <span suppressHydrationWarning>हिंदी (Hindi)</span>
         </button>
         <button
           type="button"
           onClick={() => setLanguage("en")}
+          suppressHydrationWarning
           className={cn(
             "flex-1 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer touch-manipulation",
             language === "en"
@@ -41,7 +43,7 @@ export function LanguageSelector({ variant = "pill", className }: LanguageSelect
           aria-label="Select English language"
         >
           <span>🌐</span>
-          <span>English</span>
+          <span suppressHydrationWarning>English</span>
         </button>
       </div>
     );
@@ -54,6 +56,7 @@ export function LanguageSelector({ variant = "pill", className }: LanguageSelect
         onClick={() => setLanguage(language === "hi" ? "en" : "hi")}
         aria-label={language === "hi" ? "Switch to English" : "हिंदी में बदलें"}
         title={language === "hi" ? "Switch to English" : "हिंदी में बदलें"}
+        suppressHydrationWarning
         className={cn(
           "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold transition-all border cursor-pointer select-none touch-manipulation",
           language === "hi"
@@ -63,7 +66,7 @@ export function LanguageSelector({ variant = "pill", className }: LanguageSelect
         )}
       >
         <Globe className="w-3.5 h-3.5" />
-        <span>{language === "hi" ? "English" : "हिंदी"}</span>
+        <span suppressHydrationWarning>{language === "hi" ? "English" : "हिंदी"}</span>
       </button>
     );
   }
@@ -74,6 +77,7 @@ export function LanguageSelector({ variant = "pill", className }: LanguageSelect
         <button
           type="button"
           onClick={() => setLanguage("hi")}
+          suppressHydrationWarning
           className={cn(
             "px-2.5 py-0.5 rounded-full transition-all font-bold cursor-pointer touch-manipulation",
             language === "hi"
@@ -82,11 +86,12 @@ export function LanguageSelector({ variant = "pill", className }: LanguageSelect
           )}
           aria-label="हिंदी"
         >
-          हिंदी
+          <span suppressHydrationWarning>हिंदी</span>
         </button>
         <button
           type="button"
           onClick={() => setLanguage("en")}
+          suppressHydrationWarning
           className={cn(
             "px-2.5 py-0.5 rounded-full transition-all font-bold cursor-pointer touch-manipulation",
             language === "en"
@@ -95,7 +100,7 @@ export function LanguageSelector({ variant = "pill", className }: LanguageSelect
           )}
           aria-label="English"
         >
-          English
+          <span suppressHydrationWarning>English</span>
         </button>
       </div>
     );
@@ -114,6 +119,7 @@ export function LanguageSelector({ variant = "pill", className }: LanguageSelect
       <button
         type="button"
         onClick={() => setLanguage("hi")}
+        suppressHydrationWarning
         className={cn(
           "px-2.5 py-0.5 rounded-full transition-all font-semibold flex items-center gap-1 cursor-pointer touch-manipulation",
           language === "hi"
@@ -124,11 +130,12 @@ export function LanguageSelector({ variant = "pill", className }: LanguageSelect
         aria-label="हिंदी भाषा सक्रिय करें"
       >
         <span className="text-[10px]">🇮🇳</span>
-        <span>हिंदी</span>
+        <span suppressHydrationWarning>हिंदी</span>
       </button>
       <button
         type="button"
         onClick={() => setLanguage("en")}
+        suppressHydrationWarning
         className={cn(
           "px-2.5 py-0.5 rounded-full transition-all font-semibold flex items-center gap-1 cursor-pointer touch-manipulation",
           language === "en"
@@ -139,7 +146,7 @@ export function LanguageSelector({ variant = "pill", className }: LanguageSelect
         aria-label="Switch to English"
       >
         <span className="text-[10px]">🌐</span>
-        <span>English</span>
+        <span suppressHydrationWarning>English</span>
       </button>
     </div>
   );
