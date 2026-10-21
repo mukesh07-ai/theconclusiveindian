@@ -57,4 +57,12 @@ export const MOCK_AUTHORS: Record<string, Author> = {
     bio: "ग्रामीण अर्थव्यवस्था, किसान कल्याण, फसल तकनीक और जल प्रबंधन पर जमीनी रिपोर्टिंग का अनुभव।",
     avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&auto=format&fit=crop&q=80",
   },
+  amit_kumar: {
+    id: "auth-8",
+    name: "अमित कुमार",
+    slug: "amit-kumar",
+    role: "वरिष्ठ संपादक एवं मुख्य पॉडकास्ट होस्ट ('शून्य से शिखर तक')",
+    bio: "द कन्क्लूसिव इंडियन के चर्चित वीडियो पॉडकास्ट 'शून्य से शिखर तक' के मुख्य संचालक। जमीनी सरोकार, लोकसंस्कृति, कला और देश के प्रेरक व्यक्तित्वों की अनसुनी कहानियों को सामने लाने में विशेषज्ञ।",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80",
+  },
 };

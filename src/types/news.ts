@@ -61,6 +61,12 @@ export interface VideoStory {
   category: Category;
   publishedAt: string;
   views?: string;
+  youtubeId?: string;
+  youtubeUrl?: string;
+  isFeatured?: boolean;
+  guest?: string;
+  channelName?: string;
+  description?: string;
 }
 
 export interface PhotoStory {

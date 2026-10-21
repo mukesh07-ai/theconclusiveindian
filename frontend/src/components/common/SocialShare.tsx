@@ -139,7 +139,7 @@ export function SocialShare({
     whatsapp: `https://api.whatsapp.com/send?text=${encodedWhatsAppText}`,
     twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(
       snippet ? `${title.slice(0, 100)}...\n\n${snippet.slice(0, 80)}...` : title
-    )}&url=${encodedUrl}&via=conclusiveind`,
+    )}&url=${encodedUrl}&via=tci2024`,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
     telegram: `https://t.me/share/url?url=${encodedUrl}&text=${encodeURIComponent(
       `*${title}*${snippet ? `\n\n${snippet}` : ""}`
@@ -160,7 +160,7 @@ export function SocialShare({
       }
       case "twitter": {
         const tweetText = snippet ? `${title.slice(0, 100)}...\n\n${snippet.slice(0, 80)}...` : title;
-        targetLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(activeUrl)}&via=conclusiveind`;
+        targetLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(activeUrl)}&via=tci2024`;
         break;
       }
       case "facebook":

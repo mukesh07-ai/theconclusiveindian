@@ -30,7 +30,7 @@ export function SiteFooter() {
       ),
     },
     {
-      name: "Facebook",
+      name: "Facebook (@theconclusiveindian)",
       href: SITE_CONFIG.social.facebook,
       color: "hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2]",
       icon: (
@@ -40,7 +40,7 @@ export function SiteFooter() {
       ),
     },
     {
-      name: "X (Twitter)",
+      name: "X (@tci2024)",
       href: SITE_CONFIG.social.twitter,
       color: "hover:bg-black hover:text-white hover:border-black",
       icon: (
@@ -50,7 +50,7 @@ export function SiteFooter() {
       ),
     },
     {
-      name: "Instagram",
+      name: "Instagram (@theconclusiveindian)",
       href: SITE_CONFIG.social.instagram,
       color: "hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:text-white hover:border-transparent",
       icon: (
@@ -60,7 +60,7 @@ export function SiteFooter() {
       ),
     },
     {
-      name: "YouTube",
+      name: "YouTube (@theconclusiveindian)",
       href: SITE_CONFIG.social.youtube,
       color: "hover:bg-[#FF0000] hover:text-white hover:border-[#FF0000]",
       icon: (

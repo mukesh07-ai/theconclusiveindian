@@ -122,6 +122,154 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
+
+      {/* Flagship Show / Podcast Feature */}
+      <section className="bg-gradient-to-br from-[#1C2C4E] to-[#0F172A] text-white p-8 rounded-2xl space-y-6 shadow-md border border-slate-700/60">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+          <div>
+            <div className="inline-block px-3 py-1 bg-[#E52532] text-white rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+              विशेष पॉडकास्ट शृंखला
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
+              &ldquo;शून्य से शिखर तक&rdquo; — अमित कुमार के साथ
+            </h2>
+            <p className="text-sm text-slate-300 mt-1">
+              जहाँ सुनना बदलता है सोच • भारत के संघर्ष, कला, साहित्य और समाज के अनसुने अध्याय
+            </p>
+          </div>
+          <a
+            href={SITE_CONFIG.social.youtube}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#E52532] hover:bg-[#b81d27] text-white text-xs font-bold rounded-lg transition-colors shadow-sm w-fit"
+          >
+            <span>यूट्यूब पर सब्सक्राइब करें</span>
+            <ChevronRight className="w-4 h-4" />
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div className="space-y-3">
+            <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+              चर्चित एपिसोड
+            </span>
+            <h3 className="text-xl font-bold leading-snug">
+              बुंदेलखंड की सुखी बंजर धरती से सुरों के रसधार का अनोखा सफर
+            </h3>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              इस विशेष एपिसोड में लोकगायिका व कवयित्री कविता शर्मा के साथ बुंदेली लोकसंस्कृति, जल संकट की विभीषिका, आल्हा-ऊदल के वीरगाथा काल से लेकर आधुनिक संघर्ष की मर्मस्पर्शी यात्रा का आत्मीय संवाद।
+            </p>
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <a
+                href={SITE_CONFIG.social.youtubeFeaturedVideo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-white text-[#1C2C4E] font-bold text-xs rounded-lg hover:bg-slate-100 transition-colors"
+              >
+                ▶ वीडियो देखें (YouTube)
+              </a>
+              <Link
+                href="/news/bundelkhand-suro-ki-rasdhar-kavita-sharma-podcast"
+                className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-200 hover:text-white underline underline-offset-4"
+              >
+                विस्तृत लेख पढ़ें
+              </Link>
+            </div>
+          </div>
+
+          <div className="aspect-video w-full rounded-xl overflow-hidden border border-white/10 shadow-lg bg-black">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/CfIwAGhPPvc"
+              title="बुंदेलखंड की सुखी बंजर धरती से सुरों के रसधार का अनोखा सफर - The Conclusive Indian"
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Official Social Media Network */}
+      <section className="p-8 bg-white rounded-2xl border border-gray-200 shadow-2xs space-y-6">
+        <div className="text-center space-y-2 max-w-xl mx-auto">
+          <h2 className="text-2xl font-black text-gray-900">
+            आधिकारिक सोशल मीडिया नेटवर्क
+          </h2>
+          <p className="text-xs text-gray-500">
+            द कन्क्लूसिव इंडियन के आधिकारिक हैंडल्स से जुड़ें और हर विश्वसनीय खबर, साक्षात्कार व वीडियो विश्लेषण तुरंत प्राप्त करें।
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <a
+            href={SITE_CONFIG.social.youtube}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 p-4 rounded-xl border border-gray-200 hover:border-red-500 hover:bg-red-50/40 transition-colors group"
+          >
+            <div className="w-10 h-10 rounded-lg bg-red-600 text-white flex items-center justify-center font-bold text-sm">
+              YT
+            </div>
+            <div className="min-w-0">
+              <span className="text-xs text-gray-500 block">यूट्यूब चैनल</span>
+              <span className="text-sm font-bold text-gray-900 group-hover:text-red-600 truncate block">
+                @theconclusiveindian
+              </span>
+            </div>
+          </a>
+
+          <a
+            href={SITE_CONFIG.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 p-4 rounded-xl border border-gray-200 hover:border-pink-500 hover:bg-pink-50/40 transition-colors group"
+          >
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex items-center justify-center font-bold text-sm">
+              IG
+            </div>
+            <div className="min-w-0">
+              <span className="text-xs text-gray-500 block">इंस्टाग्राम</span>
+              <span className="text-sm font-bold text-gray-900 group-hover:text-pink-600 truncate block">
+                @theconclusiveindian
+              </span>
+            </div>
+          </a>
+
+          <a
+            href={SITE_CONFIG.social.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 p-4 rounded-xl border border-gray-200 hover:border-blue-600 hover:bg-blue-50/40 transition-colors group"
+          >
+            <div className="w-10 h-10 rounded-lg bg-[#1877F2] text-white flex items-center justify-center font-bold text-sm">
+              FB
+            </div>
+            <div className="min-w-0">
+              <span className="text-xs text-gray-500 block">फेसबुक पेज</span>
+              <span className="text-sm font-bold text-gray-900 group-hover:text-blue-600 truncate block">
+                The Conclusive Indian
+              </span>
+            </div>
+          </a>
+
+          <a
+            href={SITE_CONFIG.social.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 p-4 rounded-xl border border-gray-200 hover:border-gray-900 hover:bg-gray-100 transition-colors group"
+          >
+            <div className="w-10 h-10 rounded-lg bg-black text-white flex items-center justify-center font-bold text-sm">
+              𝕏
+            </div>
+            <div className="min-w-0">
+              <span className="text-xs text-gray-500 block">एक्स (ट्विटर)</span>
+              <span className="text-sm font-bold text-gray-900 group-hover:text-black truncate block">
+                @tci2024
+              </span>
+            </div>
+          </a>
+        </div>
+      </section>
     </div>
   );
 }

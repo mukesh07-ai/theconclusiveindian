@@ -20,9 +20,15 @@ export interface SiteConfig {
   };
   social: {
     twitter: string;
+    twitterHandle?: string;
     facebook: string;
+    facebookPage?: string;
+    facebookShare?: string;
     instagram: string;
+    instagramHandle?: string;
     youtube: string;
+    youtubeFeaturedVideo?: string;
+    youtubeFeaturedVideoId?: string;
     whatsapp: string;
     telegram: string;
   };
@@ -68,10 +74,15 @@ export const SITE_CONFIG: SiteConfig = {
     country: "भारत",
   },
   social: {
-    twitter: "https://twitter.com/conclusiveind",
-    facebook: "https://facebook.com/theconclusiveindian",
-    instagram: "https://instagram.com/theconclusiveindian",
-    youtube: "https://youtube.com/@theconclusiveindian",
+    twitter: "https://x.com/tci2024",
+    twitterHandle: "@tci2024",
+    facebook: "https://www.facebook.com/share/1Kkgpxuhat/?mibextid=wwXIfr",
+    facebookPage: "https://www.facebook.com/theconclusiveindian",
+    instagram: "https://www.instagram.com/theconclusiveindian",
+    instagramHandle: "@theconclusiveindian",
+    youtube: "https://www.youtube.com/@theconclusiveindian",
+    youtubeFeaturedVideo: "https://youtu.be/CfIwAGhPPvc",
+    youtubeFeaturedVideoId: "CfIwAGhPPvc",
     whatsapp: "https://whatsapp.com/channel/theconclusiveindian",
     telegram: "https://t.me/theconclusiveindian",
   },

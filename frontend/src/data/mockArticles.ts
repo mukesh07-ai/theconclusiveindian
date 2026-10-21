@@ -7,6 +7,89 @@ const cat = (slug: string) =>
 
 export const MOCK_ARTICLES: Article[] = [
   {
+    id: "art-bundelkhand-podcast-kavita-sharma",
+    title: "बुंदेलखंड की सुखी बंजर धरती से सुरों के रसधार का अनोखा सफर: लोकगायिका कविता शर्मा की संघर्ष और सफलता की अनूठी दास्तान",
+    englishTitle: "From the Arid Lands of Bundelkhand to the Pinnacle of Folk Music: Kavita Sharma's Musical Journey",
+    slug: "bundelkhand-suro-ki-rasdhar-kavita-sharma-podcast",
+    excerpt: "द कन्क्लूसिव इंडियन के विशेष पॉडकास्ट 'शून्य से शिखर तक' में मुख्य संपादक अमित कुमार के साथ बुंदेली लोकगायिका कविता शर्मा की प्रेरक बातचीत। अभावों और सूखे की धरती से निकलकर बुंदेली राई, सोहर और लोकगीतों को वैश्विक मंच दिलाने की पूरी कहानी।",
+    content: `
+      <p class="lead-text font-medium text-lg leading-relaxed text-gray-800 mb-6">
+        नई दिल्ली। बुंदेलखंड—एक ऐसा अंचल जिसकी पहचान अक्सर ऐतिहासिक शौर्य, सूखे के संकट और पथरीली धरती के रूप में की जाती रही है। लेकिन इसी धरती के सीने में लोकसंस्कृति और सुरों का एक ऐसा अटूट सागर बहता है, जिसकी मिठास हर सुनने वाले को मंत्रमुग्ध कर देती है। <strong>The Conclusive Indian</strong> के लोकप्रिय और विचारोत्तेजक पॉडकास्ट <em>'शून्य से शिखर तक'</em> के विशेष एपिसोड में वरिष्ठ संपादक <strong>अमित कुमार</strong> ने बुंदेली लोकगायिका <strong>कविता शर्मा</strong> से उनके जीवन के संघर्षों, संगीत की साधना और बुंदेली लोककला को पुनर्जीवित करने के प्रयासों पर दिल छू लेने वाली बातचीत की।
+      </p>
+
+      <!-- Featured YouTube Video Embed -->
+      <div class="my-8 rounded-2xl overflow-hidden shadow-2xl border-2 border-[#233768]/20 bg-black">
+        <div class="relative w-full aspect-video">
+          <iframe
+            class="w-full h-full"
+            src="https://www.youtube-nocookie.com/embed/CfIwAGhPPvc?rel=0"
+            title="बुंदेलखंड की सुखी बंजर धरती से सुरों के रसधार का अनोखा सफर - The Conclusive Indian"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="p-4 bg-gradient-to-r from-[#18274b] to-[#263565] text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+          <div>
+            <span class="font-bold text-yellow-300 block text-sm">शून्य से शिखर तक | अमित कुमार के साथ</span>
+            <span class="text-gray-300 text-xs">जहाँ सुनना बदलता है सोच — The Conclusive Indian Podcast</span>
+          </div>
+          <a
+            href="https://www.youtube.com/@theconclusiveindian?sub_confirmation=1"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#E01F26] hover:bg-[#b81722] text-white font-bold rounded-lg transition-colors shrink-0"
+          >
+            <span>यूट्यूब पर सब्सक्राइब करें</span>
+          </a>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-[#233768] mt-8 mb-4">बचपन, अभाव और सुरों की पहली पहचान</h2>
+      <p class="leading-relaxed text-gray-700 mb-4">
+        कविता शर्मा बताती हैं कि ग्रामीण बुंदेलखंड में किसी लड़की के लिए संगीत को अपना करियर चुनना कभी आसान नहीं था। समाज के ताने, सीमित संसाधन और कला के प्रति रूढ़िवादी सोच के बावजूद उनके भीतर संगीत की लौ कभी मंद नहीं पड़ी। वे कहती हैं—<em>"बुंदेलखंड की धरती भले ही बंजर दिखती हो, लेकिन यहां का लोकगीत, यहां की राई और सोहर में जो मिठास है, वह दुनिया के किसी अन्य संगीत में नहीं मिलती। मैंने अभावों को ही अपनी शक्ति बनाया।"</em>
+      </p>
+
+      <div class="my-6 p-5 border-l-4 border-[#E01F26] bg-[#F5F6F8] rounded-r-lg">
+        <p class="font-semibold text-gray-900 italic text-lg">
+          "संगीत की सबसे बड़ी खासियत यही है कि यह बिना किसी भेद-भाव के लोगों को सीधे भाव और आत्मीयता से आपस में जोड़ देता है।"
+        </p>
+        <span class="block mt-2 text-sm text-gray-600 font-medium">— कविता शर्मा (पॉडकास्ट में अमित कुमार से बातचीत के दौरान)</span>
+      </div>
+
+      <h2 class="text-2xl font-bold text-[#233768] mt-8 mb-4">बुंदेली राई, सोहर और पारंपरिक धुनों को सहेजने का संकल्प</h2>
+      <p class="leading-relaxed text-gray-700 mb-4">
+        साक्षात्कार के दौरान अमित कुमार ने पारंपरिक लोकगीतों में आ रहे पश्चिमी प्रभाव और फूहड़ता पर सवाल उठाया। इस पर कविता शर्मा ने जोर देकर कहा कि नई पीढ़ी को लोकगीतों के मूल रस और अर्थ से परिचित कराना जरूरी है। उन्होंने विभिन्न अवसरों पर गाए जाने वाले सोहर, बधाई गीत और आल्हा-ऊदल की वीर गाथाओं के संदर्भ साझा किए।
+      </p>
+
+      <ul class="list-disc pl-6 space-y-2 text-gray-700 mb-6">
+        <li><strong>बुंदेली राई का शास्त्रीय स्वरूप:</strong> राई केवल नृत्य नहीं, बल्कि ढोलक और नगड़िया की थाप पर बुंदेली समाज का जीवन-उल्लास है।</li>
+        <li><strong>संस्कार गीतों की महत्ता:</strong> सोहर और विवाह गीतों में छिपे पारिवारिक संस्कार और सामाजिक समरसता।</li>
+        <li><strong>डिजिटल युग में लोकसंस्कृति:</strong> यूट्यूब और सोशल मीडिया के माध्यम से बुंदेली गीतों को देश-विदेश के लाखों श्रोताओं तक पहुंचाना।</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-[#233768] mt-8 mb-4">The Conclusive Indian से जुड़े रहें</h2>
+      <p class="leading-relaxed text-gray-700 mb-4">
+        'द कन्क्लूसिव इंडियन' अपने मंच के जरिए ऐसे ही प्रेरक व्यक्तित्वों, खोजी पत्रकारिता और जनसरोकार की आवाज़ को मजबूती से उठाता रहेगा। इस पूरे वीडियो साक्षात्कार को आप ऊपर दिए गए प्लेयर में देख सकते हैं और हमारे आधिकारिक सोशल मीडिया चैनलों पर फॉलो कर सकते हैं।
+      </p>
+    `,
+    featuredImage: "https://i.ytimg.com/vi/CfIwAGhPPvc/hqdefault.jpg",
+    imageAlt: "बुंदेलखंड की सुखी बंजर धरती से सुरों के रसधार का अनोखा सफर - कविता शर्मा पॉडकास्ट",
+    imageCaption: "द कन्क्लूसिव इंडियन के पॉडकास्ट 'शून्य से शिखर तक' में अमित कुमार के साथ लोकगायिका कविता शर्मा",
+    imageCredit: "The Conclusive Indian Media",
+    category: cat("entertainment"),
+    author: MOCK_AUTHORS.amit_kumar,
+    publishedAt: "2026-10-18T10:30:00Z",
+    updatedAt: "2026-10-18T11:50:00Z",
+    status: "published",
+    tags: ["बुंदेलखंड", "कविता_शर्मा", "बुंदेली_लोकगीत", "शून्य_से_शिखर_तक", "अमित_कुमार", "पॉडकास्ट", "The_Conclusive_Indian", "विशेष_साक्षात्कार"],
+    isBreaking: false,
+    isFeatured: true,
+    isTrending: true,
+    viewCount: 15420,
+    readTimeMinutes: 8,
+  },
+  {
     id: "art-1",
     title: "संसद में डिजिटल डेटा सुरक्षा व AI विनियमन पर नया ऐतिहासिक विधेयक पेश, नागरिकों के अधिकारों को मिलेगी सर्वोच्च प्राथमिकता",
     englishTitle: "New Historic Digital Data Protection & AI Regulation Bill Tabled in Parliament",
