@@ -4,7 +4,6 @@ import { Noto_Sans_Devanagari, Inter } from "next/font/google";
 import "./globals.css";
 import { SITE_CONFIG } from "@/config/site";
 import { SiteHeader } from "@/components/layout/SiteHeader";
-import { BreakingNewsTicker } from "@/components/layout/BreakingNewsTicker";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { FloatingCallButton } from "@/components/common/FloatingCallButton";
 import { getBreakingNews, getTrendingArticles } from "@/lib/api";
@@ -96,9 +95,8 @@ export default async function RootLayout({
       <body className="min-h-screen flex flex-col bg-white text-[#20242C]">
         <LanguageProvider>
           <Suspense fallback={<div className="h-20 bg-white border-b border-gray-200" />}>
-            <SiteHeader />
+            <SiteHeader breakingNews={breakingNews} trendingArticles={trendingArticles} />
           </Suspense>
-          <BreakingNewsTicker breakingItems={breakingNews} trendingItems={trendingArticles} />
           <main className="flex-1">{children}</main>
           <SiteFooter />
           <FloatingCallButton />

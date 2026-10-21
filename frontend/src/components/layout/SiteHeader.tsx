@@ -11,10 +11,20 @@ import { SearchModal } from "./SearchModal";
 import { MobileDrawer } from "./MobileDrawer";
 import { LocationSelectorModal } from "./LocationSelectorModal";
 import { LanguageSelector } from "../common/LanguageSelector";
+import { BreakingNewsTicker } from "./BreakingNewsTicker";
+import { BreakingNewsItem, Article } from "@/types/news";
 import { useLanguage } from "@/context/LanguageContext";
 import { cn } from "@/lib/utils";
 
-export function SiteHeader() {
+interface SiteHeaderProps {
+  breakingNews?: BreakingNewsItem[];
+  trendingArticles?: Article[];
+}
+
+export function SiteHeader({
+  breakingNews = [],
+  trendingArticles = [],
+}: SiteHeaderProps) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLocationOpen, setIsLocationOpen] = useState(false);
@@ -28,14 +38,23 @@ export function SiteHeader() {
 
       {/* Sticky Header - Opaque background, high z-index, crisp elevation */}
       <header className="sticky top-0 z-40 w-full bg-white shadow-xs">
-        {/* Desktop Masthead - Compact Height (py-2 instead of py-4) */}
+        {/* Desktop Masthead - Compact Height (py-2) */}
         <div className="hidden md:block max-w-7xl mx-auto px-4 py-2 bg-white">
           <div className="flex items-center justify-between gap-4">
             <SiteLogo variant="header" />
 
+            {/* Desktop Live Ticker Scroller in the empty space next to 'Conclusive Indian' logo */}
+            <div className="flex-1 min-w-0 mx-2 lg:mx-4">
+              <BreakingNewsTicker
+                variant="masthead"
+                breakingItems={breakingNews}
+                trendingItems={trendingArticles}
+              />
+            </div>
+
             {/* Desktop Editorial Tagline & Live Indicator - Streamlined */}
-            <div className="flex items-center gap-3">
-              <div className="hidden lg:flex items-center gap-3 bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-gray-200">
+            <div className="hidden xl:flex items-center gap-3 shrink-0">
+              <div className="flex items-center gap-2.5 bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-gray-200">
                 <div className="text-right">
                   <span className="block text-xs font-bold text-[#263565]">
                     {t("सत्य, निष्पक्षता और भारतीय जनसरोकार", "Truth, Integrity & Public Interest")}
@@ -137,6 +156,15 @@ export function SiteHeader() {
               );
             })}
           </nav>
+        </div>
+
+        {/* Mobile Slim Live Ticker */}
+        <div className="md:hidden">
+          <BreakingNewsTicker
+            variant="mobile-slim"
+            breakingItems={breakingNews}
+            trendingItems={trendingArticles}
+          />
         </div>
 
         {/* Desktop Static Main Navigation Bar */}
