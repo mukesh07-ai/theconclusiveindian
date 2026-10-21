@@ -56,10 +56,10 @@ export function SiteHeader({
             <div className="hidden xl:flex items-center gap-3 shrink-0">
               <div className="flex items-center gap-2.5 bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-gray-200">
                 <div className="text-right">
-                  <span className="block text-xs font-bold text-[#263565]">
+                  <span className="block text-xs font-bold text-[#263565]" suppressHydrationWarning>
                     {t("सत्य, निष्पक्षता और भारतीय जनसरोकार", "Truth, Integrity & Public Interest")}
                   </span>
-                  <span className="block text-[10px] text-gray-500">
+                  <span className="block text-[10px] text-gray-500" suppressHydrationWarning>
                     {t("भारत का अग्रणी डिजिटल हिंदी समाचार मंच", "India's Leading Digital News Portal")}
                   </span>
                 </div>

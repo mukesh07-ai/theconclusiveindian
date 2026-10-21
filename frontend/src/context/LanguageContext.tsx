@@ -42,8 +42,13 @@ function getServerSnapshot(): Language {
   return "hi";
 }
 
+const emptySubscribe = () => () => {};
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const language = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const isHydrated = useSyncExternalStore(emptySubscribe, () => true, () => false);
+  const storedLang = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+
+  const language: Language = isHydrated ? storedLang : "hi";
 
   const setLanguage = useCallback((lang: Language) => {
     try {

@@ -24,12 +24,12 @@ export function TopUtilityBar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
         {/* Left: Date & Edition */}
         <div className="flex items-center gap-3 shrink-0 text-[11px]">
-          <span className="flex items-center gap-1.5 text-gray-300 font-medium">
+          <span className="flex items-center gap-1.5 text-gray-300 font-medium" suppressHydrationWarning>
             <Calendar className="w-3.5 h-3.5 text-[#E52532]" />
             {dateStr}
           </span>
           <span className="text-gray-500">|</span>
-          <span className="text-gray-300">
+          <span className="text-gray-300" suppressHydrationWarning>
             {t("नई दिल्ली संस्करण", "New Delhi Edition")}
           </span>
         </div>
