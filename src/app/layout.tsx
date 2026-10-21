@@ -6,7 +6,9 @@ import { SITE_CONFIG } from "@/config/site";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { BreakingNewsTicker } from "@/components/layout/BreakingNewsTicker";
 import { SiteFooter } from "@/components/layout/SiteFooter";
-import { getBreakingNews } from "@/lib/api";
+import { FloatingCallButton } from "@/components/common/FloatingCallButton";
+import { getBreakingNews, getTrendingArticles } from "@/lib/api";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 const notoSansDevanagari = Noto_Sans_Devanagari({
   variable: "--font-noto-devanagari",
@@ -41,6 +43,13 @@ export const metadata: Metadata = {
   authors: [{ name: SITE_CONFIG.name }],
   creator: SITE_CONFIG.name,
   metadataBase: new URL(SITE_CONFIG.url),
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   openGraph: {
     type: "website",
     locale: "hi_IN",
@@ -48,11 +57,20 @@ export const metadata: Metadata = {
     title: `${SITE_CONFIG.name} - ${SITE_CONFIG.hindiName}`,
     description: SITE_CONFIG.description,
     siteName: SITE_CONFIG.name,
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: `${SITE_CONFIG.name} - ${SITE_CONFIG.hindiName}`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE_CONFIG.name} - ${SITE_CONFIG.hindiName}`,
     description: SITE_CONFIG.description,
+    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -65,7 +83,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const breakingNews = await getBreakingNews();
+  const [breakingNews, trendingArticles] = await Promise.all([
+    getBreakingNews(),
+    getTrendingArticles(8),
+  ]);
 
   return (
     <html
@@ -73,12 +94,15 @@ export default async function RootLayout({
       className={`${notoSansDevanagari.variable} ${inter.variable} antialiased`}
     >
       <body className="min-h-screen flex flex-col bg-white text-[#20242C]">
-        <Suspense fallback={<div className="h-24 bg-white border-b border-gray-200" />}>
-          <SiteHeader />
-        </Suspense>
-        <BreakingNewsTicker items={breakingNews} />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
+        <LanguageProvider>
+          <Suspense fallback={<div className="h-20 bg-white border-b border-gray-200" />}>
+            <SiteHeader />
+          </Suspense>
+          <BreakingNewsTicker breakingItems={breakingNews} trendingItems={trendingArticles} />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+          <FloatingCallButton />
+        </LanguageProvider>
       </body>
     </html>
   );

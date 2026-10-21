@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Camera, ShieldAlert } from "lucide-react";
 import { Article } from "@/types/news";
 import { ImageWithFallback } from "../common/ImageWithFallback";
+import { SocialShare } from "../common/SocialShare";
 import { cn } from "@/lib/utils";
 
 interface ArticleContentProps {
@@ -72,6 +73,17 @@ export function ArticleContent({ article, fontSize = "base" }: ArticleContentPro
           </div>
         </div>
       )}
+
+      {/* End-of-article Social Share Banner */}
+      <div className="mt-8">
+        <SocialShare
+          url={`/news/${article.slug}`}
+          title={article.title}
+          excerpt={article.excerpt}
+          image={article.featuredImage}
+          variant="banner"
+        />
+      </div>
 
       {/* Author Bio Box */}
       <div className="mt-8 p-5 bg-[#F5F6F8] rounded-xl border border-gray-200 flex items-start gap-4">

@@ -36,6 +36,15 @@ export function getHindiHeaderDate(date: Date = new Date()): string {
   return `${dayName}, ${day} ${month} ${year}`;
 }
 
+export function getEnglishHeaderDate(date: Date = new Date()): string {
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  return `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+}
+
 /**
  * Format ISO date string into readable Hindi date & time
  * e.g. "21 अक्टूबर 2026, 04:30 PM"

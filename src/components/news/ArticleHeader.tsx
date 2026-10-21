@@ -8,7 +8,6 @@ import { formatHindiDate } from "@/lib/dateFormat";
 import { Badge } from "../common/Badge";
 import { SocialShare } from "../common/SocialShare";
 import { ImageWithFallback } from "../common/ImageWithFallback";
-import { SITE_CONFIG } from "@/config/site";
 
 interface ArticleHeaderProps {
   article: Article;
@@ -25,7 +24,7 @@ export function ArticleHeader({ article, onFontSizeChange }: ArticleHeaderProps)
     }
   };
 
-  const articleUrl = `${SITE_CONFIG.url}/news/${article.slug}`;
+  const articleUrl = `/news/${article.slug}`;
 
   return (
     <header className="w-full pb-4 border-b border-gray-200 mb-6">
@@ -109,7 +108,12 @@ export function ArticleHeader({ article, onFontSizeChange }: ArticleHeaderProps)
 
       {/* Toolbar: Social Share + Font Resizer */}
       <div className="flex items-center justify-between gap-4 pt-3 flex-wrap">
-        <SocialShare url={articleUrl} title={article.title} />
+        <SocialShare
+          url={articleUrl}
+          title={article.title}
+          excerpt={article.excerpt}
+          image={article.featuredImage}
+        />
 
         {/* Text Size Resizer */}
         <div className="flex items-center gap-1.5 text-xs text-gray-500">

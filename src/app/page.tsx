@@ -53,7 +53,7 @@ export default async function HomePage() {
   const stateCategory = categories.find((c) => c.slug === "state") || categories[2];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-5 sm:py-6 space-y-8">
+    <div className="max-w-7xl mx-auto px-3 sm:px-4 py-2.5 sm:py-6 space-y-6 sm:space-y-8">
       {/* SECTION A: Hero Featured Stories Grid */}
       <section aria-label="मुख्य समाचार">
         <FeaturedNewsGrid

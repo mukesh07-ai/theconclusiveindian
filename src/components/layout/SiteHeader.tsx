@@ -3,164 +3,236 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, Menu } from "lucide-react";
+import { Search, Menu, ChevronDown, MapPin } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
 import { SiteLogo } from "../common/SiteLogo";
 import { TopUtilityBar } from "./TopUtilityBar";
 import { SearchModal } from "./SearchModal";
 import { MobileDrawer } from "./MobileDrawer";
+import { LocationSelectorModal } from "./LocationSelectorModal";
+import { LanguageSelector } from "../common/LanguageSelector";
+import { useLanguage } from "@/context/LanguageContext";
 import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLocationOpen, setIsLocationOpen] = useState(false);
+  const { language, t } = useLanguage();
   const pathname = usePathname();
 
   return (
     <>
-      <header className="w-full bg-white border-b border-[#E5E7EB] shadow-2xs">
-        {/* Desktop Top Utility Bar */}
-        <TopUtilityBar />
+      {/* Desktop Top Utility Bar - Compact Height (28px) - Natural document scroll */}
+      <TopUtilityBar />
 
-        {/* Desktop Masthead (Brand + Banner/Tagline) */}
-        <div className="hidden md:block max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between gap-6">
+      {/* Sticky Header - Opaque background, high z-index, crisp elevation */}
+      <header className="sticky top-0 z-40 w-full bg-white shadow-xs">
+        {/* Desktop Masthead - Compact Height (py-2 instead of py-4) */}
+        <div className="hidden md:block max-w-7xl mx-auto px-4 py-2 bg-white">
+          <div className="flex items-center justify-between gap-4">
             <SiteLogo variant="header" />
 
-            {/* Desktop Header Editorial Badge / Notice */}
-            <div className="hidden lg:flex items-center gap-4 bg-[#F5F6F8] px-4 py-2 rounded-lg border border-gray-200">
-              <div className="text-right">
-                <span className="block text-xs font-bold text-[#233768]">
-                  सत्य, निष्पक्षता और भारतीय जनसरोकार
-                </span>
-                <span className="block text-[11px] text-gray-500">
-                  भारत का अग्रणी डिजिटल हिंदी समाचार मंच
-                </span>
+            {/* Desktop Editorial Tagline & Live Indicator - Streamlined */}
+            <div className="flex items-center gap-3">
+              <div className="hidden lg:flex items-center gap-3 bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-gray-200">
+                <div className="text-right">
+                  <span className="block text-xs font-bold text-[#263565]">
+                    {t("सत्य, निष्पक्षता और भारतीय जनसरोकार", "Truth, Integrity & Public Interest")}
+                  </span>
+                  <span className="block text-[10px] text-gray-500">
+                    {t("भारत का अग्रणी डिजिटल हिंदी समाचार मंच", "India's Leading Digital News Portal")}
+                  </span>
+                </div>
+                <div className="w-2 h-2 rounded-full bg-[#E01F26] animate-ping shrink-0" />
               </div>
-              <div className="w-2.5 h-2.5 rounded-full bg-[#E52532] animate-ping" />
             </div>
           </div>
         </div>
 
-        {/* Mobile Header Bar (Matches reference screenshot) */}
-        <div className="md:hidden flex items-center justify-between px-3.5 py-2.5 bg-white border-b border-gray-200">
+        {/* Mobile Header Bar - Static, Compact & Touch Optimized */}
+        <div className="md:hidden flex items-center justify-between px-3 py-1.5 bg-white border-b border-gray-200">
           <SiteLogo variant="mobile" />
 
-          {/* Right: Search & Hamburger Menu */}
+          {/* Right: Language Toggle, Search & Hamburger Menu */}
           <div className="flex items-center gap-1.5">
+            <LanguageSelector variant="compact" />
+
             <button
               type="button"
               onClick={() => setIsSearchOpen(true)}
-              aria-label="समाचार खोजें"
-              className="p-2 text-[#233768] hover:bg-gray-100 rounded-full transition-colors"
+              aria-label={t("समाचार खोजें", "Search News")}
+              className="w-9 h-9 min-w-[36px] min-h-[36px] flex items-center justify-center text-[#263565] hover:bg-gray-100 active:bg-gray-200 rounded-full transition-colors cursor-pointer touch-manipulation select-none"
             >
-              <Search className="w-5 h-5" />
+              <Search className="w-4.5 h-4.5 pointer-events-none" />
             </button>
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(true)}
-              aria-label="मुख्य मेनू खोलें"
-              className="p-2 text-[#233768] hover:bg-gray-100 rounded-full transition-colors"
+              aria-label={t("मुख्य मेनू खोलें", "Open Main Menu")}
+              className="w-9 h-9 min-w-[36px] min-h-[36px] flex items-center justify-center text-[#263565] hover:bg-gray-100 active:bg-gray-200 rounded-full transition-colors cursor-pointer touch-manipulation select-none"
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5.5 h-5.5 pointer-events-none" />
             </button>
           </div>
         </div>
 
-        {/* Mobile Horizontally Scrollable Category Navigation Strip */}
-        <div className="md:hidden w-full bg-[#F5F6F8] border-b border-gray-200">
+        {/* Mobile Horizontally Scrollable Category Navigation Strip - Static */}
+        <div className="md:hidden w-full bg-white border-b border-gray-200 shadow-2xs">
           <nav
-            aria-label="मोबाइल समाचार श्रेणियां"
-            className="flex items-center overflow-x-auto no-scrollbar px-3 py-2 text-xs font-semibold whitespace-nowrap divide-x divide-gray-300"
+            aria-label={t("मोबाइल समाचार श्रेणियां", "Mobile News Categories")}
+            className="flex items-center overflow-x-auto no-scrollbar px-2 py-1.5 text-xs font-semibold whitespace-nowrap divide-x divide-gray-200"
           >
             <Link
               href="/"
               className={cn(
-                "px-2.5 py-0.5 shrink-0 transition-colors",
+                "px-2.5 py-0.5 shrink-0 transition-colors cursor-pointer touch-manipulation",
                 pathname === "/"
-                  ? "text-[#E52532] font-bold"
-                  : "text-gray-700 hover:text-[#233768]"
+                  ? "text-[#E01F26] font-bold"
+                  : "text-[#263565] hover:text-[#E01F26]"
               )}
             >
-              होम
+              {t("होम", "Home")}
             </Link>
             {SITE_CONFIG.categories.map((cat) => {
               const href = `/category/${cat.slug}`;
               const isActive = pathname === href;
+              const catTitle = language === "en" ? cat.englishName : cat.name;
+
+              // Interactive "देश / National" button in mobile category strip
+              if (cat.slug === "national") {
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => setIsLocationOpen(true)}
+                    className={cn(
+                      "inline-flex items-center gap-1 px-2.5 py-0.5 shrink-0 transition-colors cursor-pointer touch-manipulation font-semibold",
+                      pathname.startsWith("/category/national")
+                        ? "text-[#E01F26] font-bold"
+                        : "text-[#263565] hover:text-[#E01F26]"
+                    )}
+                    aria-label={t("देश, राज्य व ज़िला चुनें", "Select Country, State & District")}
+                    title={t("देश, राज्य व ज़िला चुनें", "Select Country, State & District")}
+                  >
+                    <span>{catTitle}</span>
+                    <ChevronDown className="w-3.5 h-3.5 text-[#E01F26]" />
+                  </button>
+                );
+              }
 
               return (
                 <Link
                   key={cat.id}
                   href={href}
                   className={cn(
-                    "px-2.5 py-0.5 shrink-0 transition-colors",
+                    "px-2.5 py-0.5 shrink-0 transition-colors cursor-pointer touch-manipulation",
                     isActive
-                      ? "text-[#E52532] font-bold"
-                      : "text-gray-700 hover:text-[#233768]"
+                      ? "text-[#E01F26] font-bold"
+                      : "text-[#263565] hover:text-[#E01F26]"
                   )}
                 >
-                  {cat.name}
+                  {catTitle}
                 </Link>
               );
             })}
           </nav>
         </div>
 
-        {/* Desktop Sticky Main Navigation Bar */}
-        <div className="hidden md:block sticky top-0 z-40 bg-[#233768] text-white shadow-md">
+        {/* Desktop Static Main Navigation Bar */}
+        <div className="hidden md:block bg-[#263565] text-white shadow-xs">
           <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
             <nav
-              aria-label="मुख्य श्रेणियां"
-              className="flex items-center overflow-x-auto no-scrollbar text-sm font-semibold tracking-wide"
+              aria-label={t("मुख्य श्रेणियां", "Main Categories")}
+              className="flex items-center overflow-x-auto no-scrollbar text-[13px] font-semibold tracking-wide"
             >
               <Link
                 href="/"
                 className={cn(
-                  "py-3 px-3.5 shrink-0 transition-colors relative hover:bg-white/10",
+                  "py-2 px-3 shrink-0 transition-colors relative hover:bg-white/10",
                   pathname === "/"
-                    ? "bg-[#E52532] text-white font-bold"
+                    ? "bg-[#E01F26] text-white font-bold"
                     : "text-white/95"
                 )}
               >
-                होम
+                {t("होम", "Home")}
               </Link>
 
               {SITE_CONFIG.categories.map((cat) => {
                 const href = `/category/${cat.slug}`;
                 const isActive = pathname === href;
+                const catTitle = language === "en" ? cat.englishName : cat.name;
+
+                // Interactive "देश / National" button with dropdown in desktop navbar
+                if (cat.slug === "national") {
+                  return (
+                    <button
+                      key={cat.id}
+                      type="button"
+                      onClick={() => setIsLocationOpen(true)}
+                      className={cn(
+                        "py-2 px-3 shrink-0 transition-colors relative hover:bg-white/10 flex items-center gap-1 cursor-pointer font-semibold",
+                        pathname.startsWith("/category/national")
+                          ? "bg-[#E01F26] text-white font-bold"
+                          : "text-white/95"
+                      )}
+                      title={t("भारत के सभी 28 राज्य और ज़िले चुनें", "Select All 28 States & Districts of India")}
+                      aria-label={t("भारत के सभी 28 राज्य और ज़िले चुनें", "Select All 28 States & Districts of India")}
+                    >
+                      <span>{catTitle}</span>
+                      <ChevronDown className="w-3.5 h-3.5 text-yellow-300" />
+                    </button>
+                  );
+                }
 
                 return (
                   <Link
                     key={cat.id}
                     href={href}
                     className={cn(
-                      "py-3 px-3 shrink-0 transition-colors relative hover:bg-white/10",
+                      "py-2 px-2.5 lg:px-3 shrink-0 transition-colors relative hover:bg-white/10",
                       isActive
-                        ? "bg-[#E52532] text-white font-bold"
+                        ? "bg-[#E01F26] text-white font-bold"
                         : "text-white/90"
                     )}
                   >
-                    {cat.name}
+                    {catTitle}
                   </Link>
                 );
               })}
             </nav>
 
-            {/* Desktop Search Button */}
-            <button
-              type="button"
-              onClick={() => setIsSearchOpen(true)}
-              aria-label="खोजें"
-              className="flex items-center gap-2 py-2 px-3 text-white/90 hover:text-white hover:bg-white/10 rounded transition-colors text-xs font-medium ml-2"
-            >
-              <Search className="w-4 h-4" />
-              <span>खोजें</span>
-            </button>
+            {/* Desktop Actions: Location Selector + Search Button */}
+            <div className="flex items-center gap-1.5 shrink-0 py-1">
+              <button
+                type="button"
+                onClick={() => setIsLocationOpen(true)}
+                aria-label={t("राज्य व ज़िला चुनें", "Select State & District")}
+                className="flex items-center gap-1.5 py-1 px-2.5 bg-white/10 hover:bg-white/20 text-white rounded transition-colors text-xs font-semibold cursor-pointer"
+              >
+                <MapPin className="w-3.5 h-3.5 text-yellow-300" />
+                <span>{t("राज्य/ज़िला", "States/Districts")}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsSearchOpen(true)}
+                aria-label={t("खोजें", "Search")}
+                className="flex items-center gap-1.5 py-1 px-2.5 text-white/90 hover:text-white hover:bg-white/10 rounded transition-colors text-xs font-medium cursor-pointer"
+              >
+                <Search className="w-3.5 h-3.5" />
+                <span>{t("खोजें", "Search")}</span>
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Global Interactive Modals */}
+      {/* Global Interactive Modals (Portaled cleanly to document.body) */}
+      <LocationSelectorModal
+        isOpen={isLocationOpen}
+        onClose={() => setIsLocationOpen(false)}
+      />
       <SearchModal
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
@@ -169,6 +241,7 @@ export function SiteHeader() {
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
         onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenLocation={() => setIsLocationOpen(true)}
       />
     </>
   );

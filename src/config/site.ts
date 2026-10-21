@@ -33,6 +33,19 @@ export interface SiteConfig {
     legal: { label: string; href: string }[];
     corporate: { label: string; href: string }[];
   };
+  callButton?: {
+    enabled: boolean;
+    label: string;
+    phone: string;
+  };
+  whatsappChat?: {
+    enabled: boolean;
+    label: string;
+    englishLabel: string;
+    phone: string;
+    message: string;
+    englishMessage: string;
+  };
 }
 
 export const SITE_CONFIG: SiteConfig = {
@@ -62,13 +75,26 @@ export const SITE_CONFIG: SiteConfig = {
     whatsapp: "https://whatsapp.com/channel/theconclusiveindian",
     telegram: "https://t.me/theconclusiveindian",
   },
+  callButton: {
+    enabled: true,
+    label: "कॉल करें",
+    phone: process.env.NEXT_PUBLIC_CALL_PHONE || "+91 11 4872 9000",
+  },
+  whatsappChat: {
+    enabled: true,
+    label: "व्हाट्सएप चैट",
+    englishLabel: "WhatsApp Chat",
+    phone: process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "+91 98765 43210",
+    message: "नमस्ते! मैं The Conclusive Indian टीम से संपर्क करना चाहता/चाहती हूँ।",
+    englishMessage: "Hello! I would like to connect with The Conclusive Indian team.",
+  },
   categories: [
     {
-      id: "national",
-      name: "देश",
-      englishName: "National",
-      slug: "national",
-      description: "भारत भर से ताज़ा राजनीतिक, सामाजिक व जनहितकारी समाचार",
+      id: "world",
+      name: "विदेश",
+      englishName: "World",
+      slug: "world",
+      description: "अंतरराष्ट्रीय कूटनीति, वैश्विक घटनाएं और भारत से जुड़े मामले",
       order: 1,
     },
     {
@@ -80,27 +106,27 @@ export const SITE_CONFIG: SiteConfig = {
       order: 2,
     },
     {
-      id: "state",
-      name: "राज्य समाचार",
-      englishName: "State News",
-      slug: "state",
-      description: "उत्तर प्रदेश, बिहार, मध्य प्रदेश, राजस्थान व अन्य राज्यों की बड़ी खबरें",
+      id: "entertainment",
+      name: "मनोरंजन",
+      englishName: "Entertainment",
+      slug: "entertainment",
+      description: "बॉलीवुड, ओटीटी रिलीज, समीक्षाएं, सेलिब्रिटी साक्षात्कार",
       order: 3,
     },
     {
-      id: "world",
-      name: "विदेश",
-      englishName: "World",
-      slug: "world",
-      description: "अंतरराष्ट्रीय कूटनीति, वैश्विक घटनाएं और भारत से जुड़े मामले",
+      id: "agriculture",
+      name: "कृषि",
+      englishName: "Agriculture",
+      slug: "agriculture",
+      description: "किसान कल्याण, एमएसपी, आधुनिक खेती की तकनीक व मौसम पूर्वानुमान",
       order: 4,
     },
     {
-      id: "business",
-      name: "व्यापार",
-      englishName: "Business",
-      slug: "business",
-      description: "शेयर बाजार, भारतीय अर्थव्यवस्था, स्टार्टअप्स और बैंकिंग जगत",
+      id: "national",
+      name: "देश",
+      englishName: "National",
+      slug: "national",
+      description: "भारत भर से ताज़ा राजनीतिक, सामाजिक व जनहितकारी समाचार",
       order: 5,
     },
     {
@@ -112,20 +138,12 @@ export const SITE_CONFIG: SiteConfig = {
       order: 6,
     },
     {
-      id: "entertainment",
-      name: "मनोरंजन",
-      englishName: "Entertainment",
-      slug: "entertainment",
-      description: "बॉलीवुड, ओटीटी रिलीज, समीक्षाएं, सेलिब्रिटी साक्षात्कार",
+      id: "business",
+      name: "व्यापार",
+      englishName: "Business",
+      slug: "business",
+      description: "शेयर बाजार, भारतीय अर्थव्यवस्था, स्टार्टअप्स और बैंकिंग जगत",
       order: 7,
-    },
-    {
-      id: "tech",
-      name: "टेक्नोलॉजी",
-      englishName: "Technology",
-      slug: "tech",
-      description: "आर्टिफिशियल इंटेलिजेंस, स्मार्टफोन, गैजेट्स, साइबर सुरक्षा व इनोवेशन",
-      order: 8,
     },
     {
       id: "education",
@@ -133,7 +151,7 @@ export const SITE_CONFIG: SiteConfig = {
       englishName: "Education",
       slug: "education",
       description: "बोर्ड परीक्षाएं, प्रवेश परीक्षाएं (JEE, NEET, UPSC) व शिक्षा नीतियां",
-      order: 9,
+      order: 8,
     },
     {
       id: "jobs",
@@ -141,14 +159,22 @@ export const SITE_CONFIG: SiteConfig = {
       englishName: "Jobs & Careers",
       slug: "jobs",
       description: "सरकारी नौकरियां, भर्ती सूचनाएं, करियर गाइडेंस व रोजगार अवसर",
+      order: 9,
+    },
+    {
+      id: "tech",
+      name: "टेक्नोलॉजी",
+      englishName: "Technology",
+      slug: "tech",
+      description: "आर्टिफिशियल इंटेलिजेंस, स्मार्टफोन, गैजेट्स, साइबर सुरक्षा व इनोवेशन",
       order: 10,
     },
     {
-      id: "agriculture",
-      name: "कृषि",
-      englishName: "Agriculture",
-      slug: "agriculture",
-      description: "किसान कल्याण, एमएसपी, आधुनिक खेती की तकनीक व मौसम पूर्वानुमान",
+      id: "state",
+      name: "राज्य समाचार",
+      englishName: "State News",
+      slug: "state",
+      description: "उत्तर प्रदेश, बिहार, मध्य प्रदेश, राजस्थान व अन्य राज्यों की बड़ी खबरें",
       order: 11,
     },
     {

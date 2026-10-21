@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { Clock, User, Eye } from "lucide-react";
+import { Clock, User, Eye, ChevronRight } from "lucide-react";
 import { Article } from "@/types/news";
 import { formatRelativeTimeHindi } from "@/lib/dateFormat";
 import { ImageWithFallback } from "../common/ImageWithFallback";
 import { Badge } from "../common/Badge";
+import { SocialShare } from "../common/SocialShare";
 
 interface FeaturedStoryLeadProps {
   article: Article;
@@ -14,11 +15,11 @@ export function FeaturedStoryLead({ article }: FeaturedStoryLeadProps) {
 
   return (
     <article className="group bg-white rounded-xl overflow-hidden border border-gray-200/80 shadow-xs hover:shadow-lg transition-all duration-300">
-      {/* Mobile view: Image with bottom dark gradient overlay containing badge and headline */}
+      {/* Mobile view: Matches reference screenshot with top category badge and bottom overlay */}
       <div className="md:hidden">
         <Link
           href={`/news/${article.slug}`}
-          className="relative block aspect-16/10 w-full overflow-hidden bg-gray-900"
+          className="relative block aspect-[16/10] w-full overflow-hidden bg-gray-900 rounded-xl"
         >
           <ImageWithFallback
             src={article.featuredImage}
@@ -28,20 +29,28 @@ export function FeaturedStoryLead({ article }: FeaturedStoryLeadProps) {
             sizes="(max-width: 768px) 100vw, 750px"
             className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-4">
-            <div className="mb-2 flex items-center gap-2">
-              <Badge variant="breaking" size="sm">
-                {article.category.name}
-              </Badge>
-              {article.isBreaking && (
-                <span className="text-[10px] font-bold text-yellow-300 uppercase tracking-wider flex items-center gap-1">
-                  ● बड़ी खबर
-                </span>
-              )}
+          {/* Top Corner Category Badge */}
+          <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5">
+            <span className="bg-[#E01F26] text-white text-xs font-bold px-2.5 py-1 rounded-md shadow-md uppercase tracking-wide">
+              {article.category.name}
+            </span>
+            {article.isBreaking && (
+              <span className="bg-yellow-400 text-gray-950 text-[10px] font-black px-2 py-0.5 rounded shadow-sm">
+                बड़ी खबर
+              </span>
+            )}
+          </div>
+
+          {/* Bottom Dark Gradient Overlay with Headline */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent flex flex-col justify-end p-3.5 sm:p-4 z-10">
+            <div className="flex items-end justify-between gap-2">
+              <h2 className="text-base sm:text-lg font-bold text-white line-clamp-3 leading-snug drop-shadow-md">
+                {article.title}
+              </h2>
+              <span className="w-7 h-7 rounded-full bg-white/20 backdrop-blur-xs flex items-center justify-center text-white shrink-0 mb-0.5 group-hover:bg-[#E01F26] transition-colors">
+                <ChevronRight className="w-4 h-4" />
+              </span>
             </div>
-            <h2 className="text-lg font-bold text-white line-clamp-3 leading-snug drop-shadow-xs">
-              {article.title}
-            </h2>
             <div className="flex items-center gap-2 text-[11px] text-gray-300 mt-2">
               <span className="flex items-center gap-1">
                 <Clock className="w-3 h-3 text-red-400" /> {timeAgo}
@@ -118,15 +127,14 @@ export function FeaturedStoryLead({ article }: FeaturedStoryLeadProps) {
             >
               विस्तार से पढ़ें →
             </Link>
-            <div className="flex items-center gap-2">
-              {article.tags.slice(0, 3).map((tag, idx) => (
-                <span
-                  key={idx}
-                  className="text-[11px] font-medium text-gray-500 hover:text-[#233768]"
-                >
-                  #{tag}
-                </span>
-              ))}
+            <div className="flex items-center gap-3">
+              <SocialShare
+                url={`/news/${article.slug}`}
+                title={article.title}
+                excerpt={article.excerpt}
+                image={article.featuredImage}
+                variant="compact"
+              />
             </div>
           </div>
         </div>

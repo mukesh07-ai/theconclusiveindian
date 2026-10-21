@@ -4,6 +4,7 @@ import { Article } from "@/types/news";
 import { formatRelativeTimeHindi } from "@/lib/dateFormat";
 import { ImageWithFallback } from "../common/ImageWithFallback";
 import { Badge } from "../common/Badge";
+import { SocialShare } from "../common/SocialShare";
 import { cn } from "@/lib/utils";
 
 interface NewsCardProps {
@@ -182,6 +183,21 @@ export function NewsCard({
               {article.excerpt}
             </p>
           )}
+        </div>
+        <div className="pt-2.5 mt-2 border-t border-gray-100 flex items-center justify-between">
+          <Link
+            href={`/news/${article.slug}`}
+            className="text-[11px] font-bold text-[#E01F26] hover:underline"
+          >
+            पढ़ें →
+          </Link>
+          <SocialShare
+            url={`/news/${article.slug}`}
+            title={article.title}
+            excerpt={article.excerpt}
+            image={article.featuredImage}
+            variant="compact"
+          />
         </div>
       </div>
     </article>
