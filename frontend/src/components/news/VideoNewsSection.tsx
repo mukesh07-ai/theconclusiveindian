@@ -45,7 +45,7 @@ export function VideoNewsSection({ videos }: VideoNewsSectionProps) {
                 href={SITE_CONFIG.social.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#E52532] hover:bg-[#b81722] text-white rounded-lg text-xs font-bold transition-all shadow-xs shrink-0"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#E52532] hover:bg-[#b81722] text-white rounded-lg text-xs font-bold transition-[background-color,box-shadow] shadow-xs shrink-0"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
@@ -68,14 +68,14 @@ export function VideoNewsSection({ videos }: VideoNewsSectionProps) {
               const hasYoutube = Boolean(vid.youtubeId);
 
               return (
-                <article key={vid.id} className="group flex flex-col bg-white/5 rounded-xl p-2.5 border border-white/5 hover:border-white/15 transition-all">
+                <article key={vid.id} className="group flex flex-col bg-white/5 rounded-xl p-2.5 border border-white/5 hover:border-white/15 transition-colors">
                   <div className="relative aspect-16/10 rounded-lg overflow-hidden bg-black/60 shadow-sm block">
                     <ImageWithFallback
                       src={vid.thumbnail}
                       alt={vid.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 300px"
-                      className="object-cover group-hover:scale-105 opacity-85 group-hover:opacity-95 transition-all duration-300"
+                      className="object-cover group-hover:scale-105 opacity-85 group-hover:opacity-95 transition-[transform,opacity] duration-300"
                     />
 
                     {/* Play Button Overlay */}
@@ -142,15 +142,20 @@ export function VideoNewsSection({ videos }: VideoNewsSectionProps) {
 
       {/* YouTube Video Player Modal */}
       {activeVideo && activeVideo.youtubeId && (
-        <div
-          className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200"
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setActiveVideo(null)}
+        <dialog
+          open
+          aria-label={activeVideo.title}
+          className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-4 bg-transparent border-none m-0 w-full h-full max-w-none max-h-none overflow-hidden"
         >
+          <button
+            type="button"
+            aria-label="वीडियो बंद करें"
+            tabIndex={-1}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-200 border-none cursor-default"
+            onClick={() => setActiveVideo(null)}
+          />
           <div
-            className="relative w-full max-w-4xl bg-[#18274b] rounded-2xl shadow-2xl overflow-hidden border border-white/20"
-            onClick={(e) => e.stopPropagation()}
+            className="relative z-10 w-full max-w-4xl bg-[#18274b] rounded-2xl shadow-2xl overflow-hidden border border-white/20"
           >
             {/* Modal Header */}
             <div className="p-3 sm:p-4 bg-[#111c36] border-b border-white/10 flex items-center justify-between gap-3 text-white">
@@ -214,7 +219,7 @@ export function VideoNewsSection({ videos }: VideoNewsSectionProps) {
               </div>
             </div>
           </div>
-        </div>
+        </dialog>
       )}
     </>
   );

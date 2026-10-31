@@ -1,0 +1,44 @@
+# The Conclusive Indian (द कन्क्लूसिव इंडियन)
+> निष्पक्ष • निर्भीक • निर्णायक (The Voice of Truth, Depth & Impact)
+
+The Conclusive Indian is an independent Hindi digital news publication based in New Delhi, India. It provides verified reporting, investigative journalism, policy analysis, and cultural discourse with strict adherence to the Press Council of India standards and the Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021.
+
+## Primary Metadata
+- Website: https://theconclusiveindian.in
+- Primary Language: Hindi (hi-IN)
+- Editorial Desk: editor@theconclusiveindian.in
+- Grievance Desk: grievance@theconclusiveindian.in
+
+## Core Editorial Policies
+- [Editorial Policy](https://theconclusiveindian.in/editorial-policy): Verification methodology, source standards, impartiality, and AI usage principles.
+- [Fact-Check Policy](https://theconclusiveindian.in/fact-check-policy): 4-step factual corroboration and forensic media verification workflow.
+- [Corrections Policy](https://theconclusiveindian.in/corrections-policy): Standardized protocol for transparently logging and publishing factual amendments.
+- [Privacy Policy](https://theconclusiveindian.in/privacy-policy): Reader privacy practices compliant with India's Digital Personal Data Protection (DPDP) Act.
+- [Terms & Conditions](https://theconclusiveindian.in/terms-and-conditions): Website terms, intellectual property, and fair use guidelines.
+- [Ownership & Funding](https://theconclusiveindian.in/ownership-and-funding): Transparent disclosures regarding media ownership and revenue streams.
+- [Grievance Redressal](https://theconclusiveindian.in/grievance-redressal): Statutory grievance mechanism under Rule 11 of IT Rules, 2021.
+- [Accessibility Statement](https://theconclusiveindian.in/accessibility): Digital accessibility standards adhering to WCAG 2.2 AA.
+
+## News Categories
+- [National News / देश](https://theconclusiveindian.in/category/national): Domestic governance, policy implementation, and social reporting across India.
+- [Politics / राजनीति](https://theconclusiveindian.in/category/politics): Parliamentary affairs, state elections, policy debate, and political analysis.
+- [World / विदेश](https://theconclusiveindian.in/category/world): Geopolitics, international diplomacy, multilateral summits, and Indian diaspora.
+- [Business / व्यापार](https://theconclusiveindian.in/category/business): Macroeconomics, Indian markets, startups, taxation, and Reserve Bank of India directives.
+- [Agriculture / कृषि](https://theconclusiveindian.in/category/agriculture): Rural economy, MSP, farmer welfare, agrarian technology, and seasonal weather.
+- [Sports / खेल](https://theconclusiveindian.in/category/sports): Cricket, Olympic disciplines, grassroots athletes, and tournament coverage.
+- [Technology / टेक्नोलॉजी](https://theconclusiveindian.in/category/tech): Artificial intelligence, cybersecurity, consumer electronics, and space missions.
+- [Health / स्वास्थ्य](https://theconclusiveindian.in/category/health): Public health initiatives, nutrition, Ayurveda, and medical research.
+- [Education / शिक्षा](https://theconclusiveindian.in/category/education): National Education Policy, university examinations, and youth development.
+- [Jobs / रोजगार](https://theconclusiveindian.in/category/jobs): Public sector recruitments, employment notices, and career insights.
+- [State News / राज्य समाचार](https://theconclusiveindian.in/category/state): Regional reporting across Uttar Pradesh, Bihar, Madhya Pradesh, Rajasthan, and other states.
+- [Entertainment / मनोरंजन](https://theconclusiveindian.in/category/entertainment): Cinema reviews, OTT previews, and cultural retrospectives.
+
+## Flagship Series
+- [शून्य से शिखर तक (Shunya Se Shikhar Tak)](https://theconclusiveindian.in/news/bundelkhand-suro-ki-rasdhar-kavita-sharma-podcast): Groundbreaking cultural and socio-economic video podcast hosted by Amit Kumar.
+
+## Feeds & Sitemaps
+- XML Sitemap: https://theconclusiveindian.in/sitemap.xml
+- HTML Human Sitemap: https://theconclusiveindian.in/sitemap
+- Latest News Feed: https://theconclusiveindian.in/latest-news
+- Trending Stories: https://theconclusiveindian.in/trending
+- Author Directory: https://theconclusiveindian.in/authors

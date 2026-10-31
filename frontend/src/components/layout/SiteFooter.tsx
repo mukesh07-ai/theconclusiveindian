@@ -1,33 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Mail, Send, CheckCircle2, ShieldCheck, MessageCircle } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
 import { SiteLogo } from "../common/SiteLogo";
 import { useLanguage } from "@/context/LanguageContext";
 
-export function SiteFooter() {
-  const [newsletterEmail, setNewsletterEmail] = useState("");
-  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
-  const { t } = useLanguage();
+interface SocialLinkItem {
+  name: string;
+  href: string;
+  color: string;
+  icon: React.ReactNode;
+}
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newsletterEmail.trim() || !newsletterEmail.includes("@")) return;
-    setNewsletterSuccess(true);
-    setNewsletterEmail("");
-    setTimeout(() => setNewsletterSuccess(false), 5000);
-  };
-
-  const socialLinks = [
+function getSocialLinks(): SocialLinkItem[] {
+  return [
     {
       name: "WhatsApp",
       href: SITE_CONFIG.social.whatsapp,
       color: "hover:bg-[#25D366] hover:text-white hover:border-[#25D366]",
-      icon: (
-        <MessageCircle className="w-4 h-4 fill-current" />
-      ),
+      icon: <MessageCircle className="w-4 h-4 fill-current" />,
     },
     {
       name: "Facebook (@theconclusiveindian)",
@@ -80,221 +73,294 @@ export function SiteFooter() {
       ),
     },
   ];
+}
+
+function FooterBrandAndSocial() {
+  const { t } = useLanguage();
+  const socialLinks = getSocialLinks();
 
   return (
-    <footer className="w-full bg-[#18274b] text-white border-t-4 border-[#E01F26] mt-10" suppressHydrationWarning>
-      {/* Top Banner: Brand + Social Icons + Newsletter */}
-      <div className="max-w-7xl mx-auto px-4 py-8 border-b border-white/10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-          {/* Brand Info & Mission */}
-          <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 max-w-lg">
-            <SiteLogo variant="footer" />
-            <div className="space-y-1">
-              <p className="text-xs text-gray-300 leading-relaxed">
-                {t(SITE_CONFIG.tagline, SITE_CONFIG.englishTagline)} • {t("सत्य, निष्पक्षता और भारतीय जनसरोकार", "Truth, Fairness & Public Interest")}
-              </p>
-              <p className="text-[11px] text-gray-400">
-                {t("भारत का अग्रणी स्वतंत्र डिजिटल समाचार मंच", "India's Leading Independent Digital News Platform")}
-              </p>
-            </div>
-          </div>
-
-          {/* Social Media Icons */}
-          <div className="flex flex-col items-center lg:items-end gap-2.5">
-            <span className="text-xs font-bold uppercase tracking-wider text-gray-300">
-              {t("सोशल मीडिया पर जुड़ें", "Connect on Social Media")}
-            </span>
-            <div className="flex items-center gap-2 flex-wrap justify-center">
-              {socialLinks.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={item.name}
-                  title={item.name}
-                  className={`w-9 h-9 rounded-full bg-white/10 border border-white/15 text-white/90 flex items-center justify-center transition-all duration-200 cursor-pointer shadow-2xs ${item.color}`}
-                >
-                  {item.icon}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Minimalist Newsletter Bar */}
-        <div className="mt-6 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-center md:text-left">
-            <Mail className="w-4 h-4 text-[#E01F26] shrink-0" />
-            <span className="text-xs sm:text-sm font-semibold text-gray-200">
-              {t("दैनिक समाचार बुलेटिन: महत्वपूर्ण खबरें सीधे अपने इनबॉक्स में पाएं", "Daily Newsletter: Key stories delivered directly to your inbox")}
-            </span>
-          </div>
-
-          <form
-            onSubmit={handleNewsletterSubmit}
-            className="w-full md:w-auto flex items-center gap-2 max-w-md"
-          >
-            {newsletterSuccess ? (
-              <div className="px-3 py-1.5 bg-green-900/80 border border-green-500 rounded-lg text-xs text-white flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-green-300" />
-                <span>{t("सब्सक्रिप्शन दर्ज कर लिया गया है!", "Subscribed successfully!")}</span>
-              </div>
-            ) : (
-              <>
-                <input
-                  type="email"
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder={t("ईमेल पता दर्ज करें...", "Enter your email address...")}
-                  required
-                  className="px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-gray-400 text-xs focus:outline-none focus:ring-2 focus:ring-[#E01F26] min-w-[200px]"
-                />
-                <button
-                  type="submit"
-                  className="px-3.5 py-1.5 bg-[#E01F26] hover:bg-[#b81722] text-white font-bold text-xs rounded-lg flex items-center gap-1 transition-colors shrink-0 shadow-xs cursor-pointer"
-                >
-                  <Send className="w-3 h-3" />
-                  <span>{t("सदस्यता लें", "Subscribe")}</span>
-                </button>
-              </>
-            )}
-          </form>
+    <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+      <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 max-w-lg">
+        <SiteLogo variant="footer" />
+        <div className="space-y-1">
+          <p className="text-xs text-gray-300 leading-relaxed">
+            {t(SITE_CONFIG.tagline, SITE_CONFIG.englishTagline)} • {t("सत्य, निष्पक्षता और भारतीय जनसरोकार", "Truth, Fairness & Public Interest")}
+          </p>
+          <p className="text-[11px] text-gray-400">
+            {t("भारत का अग्रणी स्वतंत्र डिजिटल समाचार मंच", "India's Leading Independent Digital News Platform")}
+          </p>
         </div>
       </div>
 
-      {/* Main Footer Links - Clean 4-Column Minimalist Grid */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
-          {/* Column 1: Top Categories */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-3 border-l-2 border-[#E01F26] pl-2">
-              {t("प्रमुख श्रेणियां", "Top Categories")}
-            </h4>
-            <ul className="space-y-1.5 text-xs text-gray-300">
-              <li>
-                <Link href="/" className="hover:text-white hover:underline transition-colors">
-                  {t("होम (मुख्य पृष्ठ)", "Home (Main Page)")}
-                </Link>
-              </li>
-              {SITE_CONFIG.categories.slice(0, 5).map((c) => (
-                <li key={c.id}>
-                  <Link
-                    href={`/category/${c.slug}`}
-                    suppressHydrationWarning
-                    className="hover:text-white hover:underline transition-colors"
-                  >
-                    <span suppressHydrationWarning>{t(c.name, c.englishName)}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 2: More Categories */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-3 border-l-2 border-[#E01F26] pl-2" suppressHydrationWarning>
-              {t("विशेष अनुभाग", "Special Sections")}
-            </h4>
-            <ul className="space-y-1.5 text-xs text-gray-300">
-              {SITE_CONFIG.categories.slice(5, 11).map((c) => (
-                <li key={c.id}>
-                  <Link
-                    href={`/category/${c.slug}`}
-                    suppressHydrationWarning
-                    className="hover:text-white hover:underline transition-colors"
-                  >
-                    <span suppressHydrationWarning>{t(c.name, c.englishName)}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 3: Editorial & Institutional */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-3 border-l-2 border-[#E01F26] pl-2">
-              {t("संपादकीय व नीतियां", "Editorial & Policies")}
-            </h4>
-            <ul className="space-y-1.5 text-xs text-gray-300">
-              {SITE_CONFIG.footerLinks.editorial.map((item, idx) => (
-                <li key={idx}>
-                  <Link href={item.href} className="hover:text-white hover:underline transition-colors">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-              {SITE_CONFIG.footerLinks.legal.map((item, idx) => (
-                <li key={idx}>
-                  <Link href={item.href} className="hover:text-white hover:underline transition-colors">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4: Contact & Office Bureau */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-3 border-l-2 border-[#E01F26] pl-2">
-              {t("संपर्क एवं कार्यालय", "Contact & Office")}
-            </h4>
-            <div className="space-y-2 text-xs text-gray-300">
-              <p className="leading-relaxed">
-                <span className="text-gray-400 block text-[11px] uppercase tracking-wider font-semibold">
-                  {t("प्रधान कार्यालय", "Head Bureau")}
-                </span>
-                {SITE_CONFIG.address.street}, {SITE_CONFIG.address.city} - {SITE_CONFIG.address.pin}
-              </p>
-              <p>
-                <span className="text-gray-400 block text-[11px] uppercase tracking-wider font-semibold">
-                  {t("संपादकीय ईमेल", "Editorial Desk")}
-                </span>
-                <a href={`mailto:${SITE_CONFIG.editorialEmail}`} className="text-white hover:text-red-300 underline">
-                  {SITE_CONFIG.editorialEmail}
-                </a>
-              </p>
-              <p>
-                <span className="text-gray-400 block text-[11px] uppercase tracking-wider font-semibold">
-                  {t("हेल्पलाइन / फोन", "Phone Helpline")}
-                </span>
-                <span className="text-gray-200">{SITE_CONFIG.phone}</span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Ethical Standards Badge */}
-        <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-center gap-2 text-center text-xs text-gray-400">
-          <ShieldCheck className="w-4 h-4 text-green-400 shrink-0" />
-          <span>
-            {t(
-              "द कन्क्लूसिव इंडियन डिजिटल मीडिया आचार संहिता व भारतीय प्रेस परिषद के नैतिक मानकों के अनुपालन हेतु पूर्णतः प्रतिबद्ध है।",
-              "The Conclusive Indian is strictly committed to compliance with ethical digital media standards and code of conduct."
-            )}
-          </span>
-        </div>
-
-        {/* Minimalist Bottom Bar */}
-        <div className="mt-4 pt-4 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400">
-          {/* Left: Copyright */}
-          <p className="text-center sm:text-left">
-            © 2026 {SITE_CONFIG.name} ({SITE_CONFIG.hindiName})। {t("सर्वाधिकार सुरक्षित।", "All rights reserved.")}
-          </p>
-
-          {/* Right: Designed and developed by TricodX */}
-          <div className="flex items-center gap-1 text-xs text-gray-400">
-            <span>Designed and developed by</span>
+      <div className="flex flex-col items-center lg:items-end gap-2.5">
+        <span className="text-xs font-bold uppercase tracking-wider text-gray-300">
+          {t("सोशल मीडिया पर जुड़ें", "Connect on Social Media")}
+        </span>
+        <div className="flex items-center gap-2 flex-wrap justify-center">
+          {socialLinks.map((item) => (
             <a
-              href="https://tricodx.com"
+              key={item.name}
+              href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-[#E01F26] font-bold transition-colors underline decoration-dotted underline-offset-4 cursor-pointer"
+              aria-label={item.name}
+              title={item.name}
+              className={`w-9 h-9 rounded-full bg-white/10 border border-white/15 text-white/90 flex items-center justify-center transition-colors duration-200 cursor-pointer shadow-2xs ${item.color}`}
             >
-              TricodX
+              {item.icon}
             </a>
-          </div>
+          ))}
         </div>
+      </div>
+    </div>
+  );
+}
+
+function FooterNewsletterBar() {
+  const { t } = useLanguage();
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterEmail.trim() || !newsletterEmail.includes("@")) return;
+    setNewsletterSuccess(true);
+    setNewsletterEmail("");
+    setTimeout(() => setNewsletterSuccess(false), 5000);
+  };
+
+  return (
+    <div className="mt-6 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="flex items-center gap-2 text-center md:text-left">
+        <Mail className="w-4 h-4 text-[#E01F26] shrink-0" />
+        <span className="text-xs sm:text-sm font-semibold text-gray-200">
+          {t("दैनिक समाचार बुलेटिन: महत्वपूर्ण खबरें सीधे अपने इनबॉक्स में पाएं", "Daily Newsletter: Key stories delivered directly to your inbox")}
+        </span>
+      </div>
+
+      <form
+        onSubmit={handleNewsletterSubmit}
+        className="w-full md:w-auto flex items-center gap-2 max-w-md"
+      >
+        {newsletterSuccess ? (
+          <div className="px-3 py-1.5 bg-green-900/80 border border-green-500 rounded-lg text-xs text-white flex items-center gap-1.5">
+            <CheckCircle2 className="w-3.5 h-3.5 text-green-300" />
+            <span>{t("सब्सक्रिप्शन दर्ज कर लिया गया है!", "Subscribed successfully!")}</span>
+          </div>
+        ) : (
+          <>
+            <input
+              type="email"
+              value={newsletterEmail}
+              onChange={(e) => setNewsletterEmail(e.target.value)}
+              placeholder={t("ईमेल पता दर्ज करें...", "Enter your email address...")}
+              required
+              className="px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-gray-400 text-xs focus:outline-none focus:ring-2 focus:ring-[#E01F26] min-w-[200px]"
+            />
+            <button
+              type="submit"
+              className="px-3.5 py-1.5 bg-[#E01F26] hover:bg-[#b81722] text-white font-bold text-xs rounded-lg flex items-center gap-1 transition-colors shrink-0 shadow-xs cursor-pointer"
+            >
+              <Send className="w-3 h-3" />
+              <span>{t("सदस्यता लें", "Subscribe")}</span>
+            </button>
+          </>
+        )}
+      </form>
+    </div>
+  );
+}
+
+function FooterNavigationGrid() {
+  const { t } = useLanguage();
+
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
+      {/* Column 1: Top Categories & News Feeds */}
+      <div>
+        <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-3 border-l-2 border-[#E01F26] pl-2">
+          {t("समाचार एवं अनुभाग", "News & Sections")}
+        </h4>
+        <ul className="space-y-1.5 text-xs text-gray-300">
+          <li>
+            <Link href="/" className="hover:text-white hover:underline transition-colors font-medium">
+              {t("होम (मुख्य पृष्ठ)", "Home (Main Page)")}
+            </Link>
+          </li>
+          <li>
+            <Link href="/latest-news" className="hover:text-white hover:underline transition-colors font-medium">
+              {t("ताज़ा खबरें (Latest News)", "Latest News")}
+            </Link>
+          </li>
+          <li>
+            <Link href="/trending" className="hover:text-white hover:underline transition-colors font-medium">
+              {t("ट्रेंडिंग न्यूज़ (Trending)", "Trending News")}
+            </Link>
+          </li>
+          {SITE_CONFIG.categories.slice(0, 5).map((c) => (
+            <li key={c.id}>
+              <Link
+                href={`/category/${c.slug}`}
+                suppressHydrationWarning
+                className="hover:text-white hover:underline transition-colors"
+              >
+                <span suppressHydrationWarning>{t(c.name, c.englishName)}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Column 2: More Categories */}
+      <div>
+        <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-3 border-l-2 border-[#E01F26] pl-2" suppressHydrationWarning>
+          {t("विशेष श्रेणियां", "Special Categories")}
+        </h4>
+        <ul className="space-y-1.5 text-xs text-gray-300">
+          {SITE_CONFIG.categories.slice(5).map((c) => (
+            <li key={c.id}>
+              <Link
+                href={`/category/${c.slug}`}
+                suppressHydrationWarning
+                className="hover:text-white hover:underline transition-colors"
+              >
+                <span suppressHydrationWarning>{t(c.name, c.englishName)}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Column 3: Editorial & Institutional */}
+      <div>
+        <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-3 border-l-2 border-[#E01F26] pl-2">
+          {t("संपादकीय व नीतियां", "Editorial & Policies")}
+        </h4>
+        <ul className="space-y-1.5 text-xs text-gray-300">
+          {SITE_CONFIG.footerLinks.editorial.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href} className="hover:text-white hover:underline transition-colors">
+                {item.label}
+              </Link>
+            </li>
+          ))}
+          {SITE_CONFIG.footerLinks.legal.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href} className="hover:text-white hover:underline transition-colors">
+                {item.label}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <button
+              type="button"
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(new Event("tci-open-cookie-settings"));
+                }
+              }}
+              className="hover:text-white hover:underline transition-colors text-left cursor-pointer text-gray-300"
+            >
+              कुकी प्राथमिकताएं (Cookie Settings)
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      {/* Column 4: Contact & Corporate Bureau */}
+      <div>
+        <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-3 border-l-2 border-[#E01F26] pl-2">
+          {t("संस्थागत एवं संपर्क", "Corporate & Contact")}
+        </h4>
+        <ul className="space-y-1.5 text-xs text-gray-300 mb-4">
+          {SITE_CONFIG.footerLinks.corporate.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href} className="hover:text-white hover:underline transition-colors">
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <div className="space-y-2 text-xs text-gray-300 pt-2 border-t border-white/10">
+          <p className="leading-relaxed">
+            <span className="text-gray-400 block text-[11px] uppercase tracking-wider font-semibold">
+              {t("प्रधान कार्यालय", "Head Bureau")}
+            </span>
+            {SITE_CONFIG.address.street}, {SITE_CONFIG.address.city} - {SITE_CONFIG.address.pin}
+          </p>
+          <p>
+            <span className="text-gray-400 block text-[11px] uppercase tracking-wider font-semibold">
+              {t("संपादकीय ईमेल", "Editorial Desk")}
+            </span>
+            <a href={`mailto:${SITE_CONFIG.editorialEmail}`} className="text-white hover:text-red-300 underline">
+              {SITE_CONFIG.editorialEmail}
+            </a>
+          </p>
+          <p>
+            <span className="text-gray-400 block text-[11px] uppercase tracking-wider font-semibold">
+              {t("शिकायत निवारण ईमेल", "Grievance Desk")}
+            </span>
+            <a href={`mailto:${SITE_CONFIG.compliance.grievanceOfficer.email}`} className="text-white hover:text-red-300 underline">
+              {SITE_CONFIG.compliance.grievanceOfficer.email}
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FooterBottomBar() {
+  const { t } = useLanguage();
+
+  return (
+    <>
+      {/* Ethical Standards Badge */}
+      <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-center gap-2 text-center text-xs text-gray-400">
+        <ShieldCheck className="w-4 h-4 text-green-400 shrink-0" />
+        <span>
+          {t(
+            "द कन्क्लूसिव इंडियन डिजिटल मीडिया आचार संहिता व भारतीय प्रेस परिषद के नैतिक मानकों के अनुपालन हेतु पूर्णतः प्रतिबद्ध है।",
+            "The Conclusive Indian is strictly committed to compliance with ethical digital media standards and code of conduct."
+          )}
+        </span>
+      </div>
+
+      {/* Minimalist Bottom Bar */}
+      <div className="mt-4 pt-4 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400">
+        <p className="text-center sm:text-left">
+          © 2026 {SITE_CONFIG.name} ({SITE_CONFIG.hindiName})। {t("सर्वाधिकार सुरक्षित।", "All rights reserved.")}
+        </p>
+
+        <div className="flex items-center gap-1 text-xs text-gray-400">
+          <span>Designed and developed by</span>
+          <a
+            href="https://tricodx.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-[#E01F26] font-bold transition-colors underline decoration-dotted underline-offset-4 cursor-pointer"
+          >
+            TricodX
+          </a>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export function SiteFooter() {
+  return (
+    <footer className="w-full bg-[#18274b] text-white border-t-4 border-[#E01F26] mt-10" suppressHydrationWarning>
+      <div className="max-w-7xl mx-auto px-4 py-8 border-b border-white/10">
+        <FooterBrandAndSocial />
+        <FooterNewsletterBar />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <FooterNavigationGrid />
+        <FooterBottomBar />
       </div>
     </footer>
   );

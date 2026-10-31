@@ -8,13 +8,15 @@ import { SocialShare } from "../common/SocialShare";
 
 interface FeaturedStoryLeadProps {
   article: Article;
+  asH1?: boolean;
 }
 
-export function FeaturedStoryLead({ article }: FeaturedStoryLeadProps) {
+export function FeaturedStoryLead({ article, asH1 = true }: FeaturedStoryLeadProps) {
   const timeAgo = formatRelativeTimeHindi(article.publishedAt);
+  const HeadingTag = asH1 ? "h1" : "h2";
 
   return (
-    <article className="group bg-white rounded-xl overflow-hidden border border-gray-200/80 shadow-xs hover:shadow-lg transition-all duration-300">
+    <article className="group bg-white rounded-xl overflow-hidden border border-gray-200/80 shadow-xs hover:shadow-lg transition-shadow duration-300">
       {/* Mobile view: Matches reference screenshot with top category badge and bottom overlay */}
       <div className="md:hidden">
         <Link
@@ -44,9 +46,9 @@ export function FeaturedStoryLead({ article }: FeaturedStoryLeadProps) {
           {/* Bottom Dark Gradient Overlay with Headline */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent flex flex-col justify-end p-3.5 sm:p-4 z-10">
             <div className="flex items-end justify-between gap-2">
-              <h2 className="text-base sm:text-lg font-bold text-white line-clamp-3 leading-snug drop-shadow-md">
+              <HeadingTag className="text-base sm:text-lg font-bold text-white line-clamp-3 leading-snug drop-shadow-md">
                 {article.title}
-              </h2>
+              </HeadingTag>
               <span className="w-7 h-7 rounded-full bg-white/20 backdrop-blur-xs flex items-center justify-center text-white shrink-0 mb-0.5 group-hover:bg-[#E01F26] transition-colors">
                 <ChevronRight className="w-4 h-4" />
               </span>
@@ -112,9 +114,9 @@ export function FeaturedStoryLead({ article }: FeaturedStoryLeadProps) {
             )}
           </div>
 
-          <h2 className="text-xl lg:text-2xl xl:text-3xl font-extrabold text-[#20242C] group-hover:text-[#233768] leading-tight mb-3 transition-colors">
+          <HeadingTag className="text-xl lg:text-2xl xl:text-3xl font-extrabold text-[#20242C] group-hover:text-[#233768] leading-tight mb-3 transition-colors">
             <Link href={`/news/${article.slug}`}>{article.title}</Link>
-          </h2>
+          </HeadingTag>
 
           <p className="text-sm text-gray-600 leading-relaxed line-clamp-3 mb-4">
             {article.excerpt}

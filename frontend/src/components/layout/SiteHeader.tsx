@@ -21,9 +21,12 @@ interface SiteHeaderProps {
   trendingArticles?: Article[];
 }
 
+const DEFAULT_BREAKING_NEWS: BreakingNewsItem[] = [];
+const DEFAULT_TRENDING_ARTICLES: Article[] = [];
+
 export function SiteHeader({
-  breakingNews = [],
-  trendingArticles = [],
+  breakingNews = DEFAULT_BREAKING_NEWS,
+  trendingArticles = DEFAULT_TRENDING_ARTICLES,
 }: SiteHeaderProps) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -52,9 +55,22 @@ export function SiteHeader({
               />
             </div>
 
-            {/* Desktop Editorial Tagline & Live Indicator - Streamlined */}
-            <div className="hidden xl:flex items-center gap-3 shrink-0">
-              <div className="flex items-center gap-2.5 bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-gray-200">
+            {/* Desktop Editorial Tagline, WhatsApp Channel & Live Indicator */}
+            <div className="hidden lg:flex items-center gap-3 shrink-0">
+              <a
+                href={SITE_CONFIG.social.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t("व्हाट्सएप चैनल", "WhatsApp Channel")}
+                title={t("द कन्क्लूसिव इंडियन आधिकारिक व्हाट्सएप चैनल से जुड़ें", "Join The Conclusive Indian Official WhatsApp Channel")}
+                className="w-8 h-8 flex items-center justify-center bg-[#25D366] hover:bg-[#20ba59] active:bg-[#1da850] text-white rounded-full transition-[background-color,box-shadow] shadow-2xs hover:shadow-xs cursor-pointer select-none"
+              >
+                <svg className="w-4.5 h-4.5 fill-white shrink-0 pointer-events-none" viewBox="0 0 24 24">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+                </svg>
+              </a>
+
+              <div className="hidden xl:flex items-center gap-2.5 bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-gray-200">
                 <div className="text-right">
                   <span className="block text-xs font-bold text-[#263565]" suppressHydrationWarning>
                     {t("सत्य, निष्पक्षता और भारतीय जनसरोकार", "Truth, Integrity & Public Interest")}
@@ -73,9 +89,23 @@ export function SiteHeader({
         <div className="md:hidden flex items-center justify-between px-3 py-1.5 bg-white border-b border-gray-200">
           <SiteLogo variant="mobile" />
 
-          {/* Right: Language Toggle, Search & Hamburger Menu */}
+          {/* Right: Language Toggle, WhatsApp Icon, Search & Hamburger Menu */}
           <div className="flex items-center gap-1.5">
             <LanguageSelector variant="compact" />
+
+            {/* Mobile WhatsApp Channel Button */}
+            <a
+              href={SITE_CONFIG.social.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t("व्हाट्सएप चैनल", "WhatsApp Channel")}
+              title={t("द कन्क्लूसिव इंडियन व्हाट्सएप चैनल", "The Conclusive Indian WhatsApp Channel")}
+              className="w-9 h-9 min-w-[36px] min-h-[36px] flex items-center justify-center bg-[#25D366]/10 hover:bg-[#25D366]/20 active:bg-[#25D366]/30 text-[#25D366] rounded-full transition-colors cursor-pointer touch-manipulation select-none"
+            >
+              <svg className="w-5 h-5 fill-current pointer-events-none" viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+              </svg>
+            </a>
 
             <button
               type="button"

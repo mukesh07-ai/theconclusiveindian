@@ -88,16 +88,20 @@ export function LocationSelectorModal({ isOpen, onClose }: LocationSelectorModal
   if (!isMounted || !isOpen) return null;
 
   const content = (
-    <div
-      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-4 bg-black/70 backdrop-blur-xs animate-in fade-in duration-200"
-      role="dialog"
-      aria-modal="true"
+    <dialog
+      open
+      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-4 bg-transparent border-none m-0 w-full h-full max-w-none max-h-none overflow-hidden"
       aria-label={t("राज्य और ज़िला चुनें", "Select State and District")}
-      onClick={handleBackdropClick}
     >
+      <button
+        type="button"
+        aria-label={t("बंद करें", "Close")}
+        tabIndex={-1}
+        className="fixed inset-0 bg-black/70 backdrop-blur-xs transition-opacity duration-200 border-none cursor-default"
+        onClick={handleBackdropClick}
+      />
       <div
-        className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl flex flex-col max-h-[88dvh] overflow-hidden border border-gray-200 animate-in zoom-in-95 duration-200"
-        onClick={(e) => e.stopPropagation()}
+        className="relative z-10 w-full max-w-2xl bg-white rounded-2xl shadow-2xl flex flex-col max-h-[88dvh] overflow-hidden border border-gray-200 animate-in zoom-in-95 duration-200"
       >
         {/* Modal Header */}
         <div className="px-4 py-3 sm:px-5 sm:py-3.5 bg-[#263565] text-white flex items-center justify-between shrink-0">
@@ -202,7 +206,7 @@ export function LocationSelectorModal({ isOpen, onClose }: LocationSelectorModal
                       key={district.id}
                       type="button"
                       onClick={() => handleDistrictSelect(selectedState, district)}
-                      className="p-2 bg-gray-50 hover:bg-[#263565] hover:text-white rounded-lg border border-gray-200 text-left transition-all group cursor-pointer"
+                      className="p-2 bg-gray-50 hover:bg-[#263565] hover:text-white rounded-lg border border-gray-200 text-left transition-colors group cursor-pointer"
                     >
                       <div className="font-semibold text-xs sm:text-[13px] text-gray-900 group-hover:text-white">
                         {language === "en" ? district.englishName : district.name}
@@ -231,7 +235,7 @@ export function LocationSelectorModal({ isOpen, onClose }: LocationSelectorModal
                         key={state.code}
                         type="button"
                         onClick={() => handleStateClick(state)}
-                        className="flex items-center justify-between p-2 bg-gray-50 hover:bg-red-50 hover:border-[#E01F26] rounded-xl border border-gray-200 text-left transition-all group cursor-pointer"
+                        className="flex items-center justify-between p-2 bg-gray-50 hover:bg-red-50 hover:border-[#E01F26] rounded-xl border border-gray-200 text-left transition-colors group cursor-pointer"
                       >
                         <div>
                           <div className="font-bold text-xs sm:text-[13px] text-gray-900 group-hover:text-[#E01F26]">
@@ -260,7 +264,7 @@ export function LocationSelectorModal({ isOpen, onClose }: LocationSelectorModal
                         key={ut.code}
                         type="button"
                         onClick={() => handleStateClick(ut)}
-                        className="flex items-center justify-between p-2 bg-gray-50 hover:bg-red-50 hover:border-[#E01F26] rounded-xl border border-gray-200 text-left transition-all group cursor-pointer"
+                        className="flex items-center justify-between p-2 bg-gray-50 hover:bg-red-50 hover:border-[#E01F26] rounded-xl border border-gray-200 text-left transition-colors group cursor-pointer"
                       >
                         <div>
                           <div className="font-bold text-xs sm:text-[13px] text-gray-900 group-hover:text-[#E01F26]">
@@ -291,7 +295,7 @@ export function LocationSelectorModal({ isOpen, onClose }: LocationSelectorModal
           </button>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 
   return createPortal(content, document.body);

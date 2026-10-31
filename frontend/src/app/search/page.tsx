@@ -23,7 +23,14 @@ export async function generateMetadata({
 
   return {
     title,
-    description: `The Conclusive Indian पर ताज़ा समाचार खोजें`,
+    description: `The Conclusive Indian पर ताज़ा समाचार, विशेष रिपोर्ट और विश्लेषण खोजें।`,
+    robots: {
+      index: false,
+      follow: true,
+    },
+    alternates: {
+      canonical: "/search",
+    },
   };
 }
 
@@ -64,6 +71,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
             <input
               type="text"
               name="q"
+              aria-label="समाचार, मुद्दे, या विषय खोजें"
               defaultValue={query}
               placeholder="संसद, बजट, क्रिकेट, इसरो, रोजगार, AI..."
               className="w-full pl-11 pr-4 py-3 bg-white text-gray-900 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#233768] shadow-2xs"
@@ -73,6 +81,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           {/* Category Filter Select */}
           <select
             name="cat"
+            aria-label="श्रेणी चुनें (Select category)"
             defaultValue={cat}
             className="px-3 py-3 bg-white text-gray-700 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#233768] shadow-2xs"
           >

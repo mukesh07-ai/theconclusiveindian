@@ -90,16 +90,19 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     [isMounted, effectiveLanguage]
   );
 
+  const contextValue = React.useMemo(
+    () => ({
+      language: effectiveLanguage,
+      isMounted,
+      setLanguage,
+      toggleLanguage,
+      t,
+    }),
+    [effectiveLanguage, isMounted, setLanguage, toggleLanguage, t]
+  );
+
   return (
-    <LanguageContext.Provider
-      value={{
-        language: effectiveLanguage,
-        isMounted,
-        setLanguage,
-        toggleLanguage,
-        t,
-      }}
-    >
+    <LanguageContext.Provider value={contextValue}>
       {children}
     </LanguageContext.Provider>
   );

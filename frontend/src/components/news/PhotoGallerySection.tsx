@@ -36,7 +36,7 @@ export function PhotoGallerySection({ photos }: PhotoGallerySectionProps) {
                 alt={item.title}
                 fill
                 sizes="(max-width: 768px) 100vw, 400px"
-                className="object-cover opacity-80 group-hover:scale-105 group-hover:opacity-90 transition-all duration-300"
+                className="object-cover opacity-80 group-hover:scale-105 group-hover:opacity-90 transition-[transform,opacity] duration-300"
               />
               {/* Photo Count Badge */}
               <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-xs text-white text-xs font-bold px-2 py-1 rounded-md flex items-center gap-1.5 shadow-sm">

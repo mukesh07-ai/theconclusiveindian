@@ -114,7 +114,7 @@ export function NewsCard({
           alt={article.imageAlt || article.title}
           fill
           sizes="(max-width: 768px) 100vw, 384px"
-          className="object-cover opacity-80 group-hover:scale-105 group-hover:opacity-90 transition-all duration-300"
+          className="object-cover opacity-80 group-hover:scale-105 group-hover:opacity-90 transition-[transform,opacity] duration-300"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-4">
           <div className="mb-2">
@@ -122,7 +122,7 @@ export function NewsCard({
               {article.category.name}
             </Badge>
           </div>
-          <h3 className="text-sm sm:text-base font-bold text-white group-hover:underline line-clamp-2 transition-all">
+          <h3 className="text-sm sm:text-base font-bold text-white group-hover:underline line-clamp-2 transition-colors">
             <Link href={`/news/${article.slug}`}>{article.title}</Link>
           </h3>
           <div className="flex items-center gap-2 text-[11px] text-gray-300 mt-2">

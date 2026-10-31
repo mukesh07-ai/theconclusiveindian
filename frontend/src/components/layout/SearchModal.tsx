@@ -47,15 +47,21 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     }
   }, [isOpen]);
 
+  const handleCloseRef = useRef(handleClose);
   useEffect(() => {
+    handleCloseRef.current = handleClose;
+  }, [handleClose]);
+
+  useEffect(() => {
+    if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
-        handleClose();
+      if (e.key === "Escape") {
+        handleCloseRef.current();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, handleClose]);
+  }, [isOpen]);
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (Date.now() - mountedAtRef.current < 350) return;
@@ -80,16 +86,20 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   };
 
   const content = (
-    <div
-      className="fixed inset-0 z-[99999] flex items-start justify-center pt-12 sm:pt-20 px-3 sm:px-4 bg-black/70 backdrop-blur-xs animate-in fade-in duration-200"
-      onClick={handleBackdropClick}
-      role="dialog"
-      aria-modal="true"
+    <dialog
+      open
+      className="fixed inset-0 z-[99999] flex items-start justify-center pt-12 sm:pt-20 px-3 sm:px-4 bg-transparent border-none m-0 w-full h-full max-w-none max-h-none overflow-hidden"
       aria-label={t("समाचार खोजें", "Search News")}
     >
+      <button
+        type="button"
+        aria-label={t("खोज बंद करें", "Close search")}
+        tabIndex={-1}
+        className="fixed inset-0 bg-black/70 backdrop-blur-xs transition-opacity duration-200 border-none cursor-default"
+        onClick={handleBackdropClick}
+      />
       <div
-        className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 animate-in zoom-in-95 duration-200"
-        onClick={(e) => e.stopPropagation()}
+        className="relative z-10 w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 animate-in zoom-in-95 duration-200"
       >
         {/* Search Input Bar */}
         <form onSubmit={handleSubmit} className="relative flex items-center border-b border-gray-200 bg-white">
@@ -129,7 +139,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 key={topic.slug}
                 type="button"
                 onClick={() => handleTopicClick(topic.name)}
-                className="px-3 py-1.5 bg-white text-xs font-semibold text-gray-700 hover:text-[#263565] hover:border-[#263565] border border-gray-200 rounded-full transition-all shadow-2xs cursor-pointer touch-manipulation active:scale-95"
+                className="px-3 py-1.5 bg-white text-xs font-semibold text-gray-700 hover:text-[#263565] hover:border-[#263565] border border-gray-200 rounded-full transition-colors shadow-2xs cursor-pointer touch-manipulation active:scale-95"
               >
                 {topic.name}
               </button>
@@ -157,7 +167,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
           </div>
         )}
       </div>
-    </div>
+    </dialog>
   );
 
   return createPortal(content, document.body);

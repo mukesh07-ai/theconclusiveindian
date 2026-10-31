@@ -52,6 +52,26 @@ export interface SiteConfig {
     message: string;
     englishMessage: string;
   };
+  compliance: {
+    grievanceOfficer: {
+      name: string;
+      title: string;
+      email: string;
+      responseWindow: string;
+      address: string;
+      isVerified: boolean;
+    };
+    pressCouncilEthics: boolean;
+    itRules2021: boolean;
+    legalReviewDisclaimer: string;
+  };
+  businessVerification: {
+    isRegisteredEntityVerified: boolean;
+    isAddressVerified: boolean;
+    isPhoneVerified: boolean;
+    entityName: string;
+    registrationNumberPlaceholder: string;
+  };
 }
 
 export const SITE_CONFIG: SiteConfig = {
@@ -61,10 +81,10 @@ export const SITE_CONFIG: SiteConfig = {
   englishTagline: "The Voice of Truth, Depth & Impact",
   description:
     "द कन्क्लूसिव इंडियन - भारत का विश्वसनीय और निष्पक्ष हिंदी डिजिटल समाचार मंच। देश, दुनिया, राजनीति, व्यापार, खेल, मनोरंजन और तकनीक की प्रामाणिक खबरें।",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://theconclusiveindian.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://theconclusiveindian.in",
   ogImage: "/og-image.jpg",
-  editorialEmail: "editor@theconclusiveindian.com",
-  contactEmail: "contact@theconclusiveindian.com",
+  editorialEmail: "editor@theconclusiveindian.in",
+  contactEmail: "contact@theconclusiveindian.in",
   phone: "+91 11 4872 9000",
   address: {
     street: "प्रेस एन्क्लेव, 4th फ्लोर, मीडिया टावर, कस्तूरबा गांधी मार्ग",
@@ -98,6 +118,27 @@ export const SITE_CONFIG: SiteConfig = {
     phone: process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "+91 98765 43210",
     message: "नमस्ते! मैं The Conclusive Indian टीम से संपर्क करना चाहता/चाहती हूँ।",
     englishMessage: "Hello! I would like to connect with The Conclusive Indian team.",
+  },
+  compliance: {
+    grievanceOfficer: {
+      name: "श्री आलोक नारायण",
+      title: "नामित शिकायत निवारण अधिकारी (Grievance Officer)",
+      email: "grievance@theconclusiveindian.in",
+      responseWindow: "24 घंटे में पावती, 15 कार्यदिवसों में समाधान",
+      address: "प्रेस एन्क्लेव, 4th फ्लोर, मीडिया टावर, कस्तूरबा गांधी मार्ग, नई दिल्ली - 110001",
+      isVerified: false, // Flagged placeholder pending official appointment registration
+    },
+    pressCouncilEthics: true,
+    itRules2021: true,
+    legalReviewDisclaimer:
+      "यह विधिक एवं नीतिगत दस्तावेज सामान्य पारदर्शिता हेतु तैयार किया गया है। उत्पादन में लाइव करने से पूर्व योग्य विधि सलाहकार द्वारा अंतिम समीक्षा अपेक्षित है।",
+  },
+  businessVerification: {
+    isRegisteredEntityVerified: false, // Flagged configuration placeholder
+    isAddressVerified: false, // Flagged configuration placeholder
+    isPhoneVerified: false, // Flagged configuration placeholder
+    entityName: "The Conclusive Indian Media Network [पंजीकरण प्रक्रियाधीन / Placeholder]",
+    registrationNumberPlaceholder: "CIN / MSME: [कॉन्फ़िगरेशन प्लेसहोल्डर - सत्यापन लंबित]",
   },
   categories: [
     {
@@ -198,32 +239,35 @@ export const SITE_CONFIG: SiteConfig = {
     },
   ],
   trendingTopics: [
-    { name: "#संसद_सत्र2026", slug: "parliament-session" },
-    { name: "#भारतीय_अर्थव्यवस्था", slug: "indian-economy" },
-    { name: "#T20_विश्वकप", slug: "t20-worldcup" },
-    { name: "#AI_इनोवेशन", slug: "ai-innovation" },
-    { name: "#यूपी_चुनाव_अपडेट", slug: "up-elections" },
-    { name: "#सोना_चांदी_भाव", slug: "gold-silver-rates" },
+    { name: "#शून्य_से_शिखर_तक", slug: "shunya-se-shikhar-tak" },
+    { name: "#अजीत_डोभाल", slug: "ajit-doval" },
+    { name: "#चंबल_सेंचुरी", slug: "chambal-sanctuary" },
+    { name: "#बुंदेलखंड_पॉडकास्ट", slug: "bundelkhand-podcast" },
+    { name: "#सोनम_वांगचुक", slug: "sonam-wangchuk" },
+    { name: "#स्वामी_दर्शन_भारती", slug: "swami-darshan-bharti" },
+    { name: "#उम्मेदाराम_बेनीवाल", slug: "umedaram-beniwal" },
   ],
   footerLinks: {
     editorial: [
-      { label: "हमारे बारे में (About Us)", href: "/about" },
+      { label: "हमारे बारे में (About Us)", href: "/about-us" },
       { label: "संपादकीय नीति (Editorial Policy)", href: "/editorial-policy" },
-      { label: "तथ्य जांच नीति (Fact-Check Policy)", href: "/editorial-policy#fact-checking" },
-      { label: "सुधार नीति (Corrections Policy)", href: "/editorial-policy#corrections" },
-      { label: "संपादकीय टीम (Editorial Board)", href: "/about#editorial-board" },
+      { label: "तथ्य जांच नीति (Fact-Check Policy)", href: "/fact-check-policy" },
+      { label: "सुधार नीति (Corrections Policy)", href: "/corrections-policy" },
+      { label: "संपादकीय टीम (Authors & Editors)", href: "/authors" },
+      { label: "साइटमैप (HTML Sitemap)", href: "/sitemap" },
     ],
     legal: [
       { label: "गोपनीयता नीति (Privacy Policy)", href: "/privacy-policy" },
-      { label: "नियम एवं शर्तें (Terms & Conditions)", href: "/privacy-policy#terms" },
-      { label: "डिस्क्लेमर (Disclaimer)", href: "/privacy-policy#disclaimer" },
-      { label: "डिजिटल आचार संहिता (Code of Ethics)", href: "/editorial-policy#code-of-ethics" },
+      { label: "नियम एवं शर्तें (Terms & Conditions)", href: "/terms-and-conditions" },
+      { label: "कुकी नीति (Cookie Policy)", href: "/cookie-policy" },
+      { label: "डिस्क्लेमर (Legal Disclaimer)", href: "/disclaimer" },
+      { label: "शिकायत निवारण (Grievance Redressal)", href: "/grievance-redressal" },
     ],
     corporate: [
-      { label: "संपर्क करें (Contact Us)", href: "/contact" },
-      { label: "विज्ञापन दें (Advertise With Us)", href: "/contact#advertise" },
-      { label: "शिकायत निवारण (Grievance Redressal)", href: "/contact#grievance" },
-      { label: "ई-पेपर संस्करण (e-Paper)", href: "#" },
+      { label: "संपर्क करें (Contact Us)", href: "/contact-us" },
+      { label: "विज्ञापन दें (Advertise With Us)", href: "/advertise-with-us" },
+      { label: "स्वामित्व एवं फंडिंग (Ownership & Funding)", href: "/ownership-and-funding" },
+      { label: "सुलभता नीति (Accessibility)", href: "/accessibility" },
     ],
   },
 };

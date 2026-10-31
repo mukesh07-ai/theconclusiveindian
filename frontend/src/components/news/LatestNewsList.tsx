@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { RefreshCw, ChevronRight } from "lucide-react";
 import { Article } from "@/types/news";
 import { getLatestArticles } from "@/lib/api";
@@ -16,7 +16,7 @@ export function LatestNewsList({
   initialHasMore,
 }: LatestNewsListProps) {
   const [articles, setArticles] = useState<Article[]>(initialArticles);
-  const [page, setPage] = useState(1);
+  const pageRef = useRef(1);
   const [hasMore, setHasMore] = useState(initialHasMore);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,10 +25,10 @@ export function LatestNewsList({
     setIsLoading(true);
 
     try {
-      const nextPage = page + 1;
+      const nextPage = pageRef.current + 1;
       const res = await getLatestArticles(nextPage, 6);
       setArticles((prev) => [...prev, ...res.data]);
-      setPage(nextPage);
+      pageRef.current = nextPage;
       setHasMore(res.hasMore);
     } catch {
       // Handle gracefully
@@ -71,7 +71,7 @@ export function LatestNewsList({
             type="button"
             onClick={handleLoadMore}
             disabled={isLoading}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-50 text-[#233768] hover:text-[#E52532] font-bold text-sm rounded-lg border-2 border-[#233768]/20 hover:border-[#E52532] transition-all shadow-2xs cursor-pointer disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-50 text-[#233768] hover:text-[#E52532] font-bold text-sm rounded-lg border-2 border-[#233768]/20 hover:border-[#E52532] transition-colors shadow-2xs cursor-pointer disabled:opacity-50"
           >
             {isLoading ? (
               <>

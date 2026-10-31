@@ -74,7 +74,10 @@ export function ArticleHeader({ article, onFontSizeChange }: ArticleHeaderProps)
 
       {/* Author & Publication Timestamps */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-3 border-y border-gray-100 text-xs text-gray-500">
-        <div className="flex items-center gap-3">
+        <Link
+          href={`/author/${article.author.slug}`}
+          className="group flex items-center gap-3"
+        >
           <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-200 border border-gray-300 shrink-0">
             <ImageWithFallback
               src={article.author.avatar || ""}
@@ -85,12 +88,12 @@ export function ArticleHeader({ article, onFontSizeChange }: ArticleHeaderProps)
             />
           </div>
           <div>
-            <div className="font-bold text-gray-900 text-sm">
+            <div className="font-bold text-gray-900 group-hover:text-[#233768] text-sm transition-colors">
               {article.author.name}
             </div>
             <div className="text-[11px] text-gray-500">{article.author.role}</div>
           </div>
-        </div>
+        </Link>
 
         <div className="flex flex-col sm:items-end text-[11px] space-y-0.5">
           <div className="flex items-center gap-1.5 text-gray-600">

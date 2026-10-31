@@ -29,7 +29,12 @@ npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) (or the next available port) to view the application.
 
-### Production Build & Typecheck
+### Type Checking
+```bash
+npm run type-check
+```
+
+### Production Build
 ```bash
 npm run build
 npm run start
@@ -52,7 +57,8 @@ frontend/
 │   ├── icon.png            # 512x512 PWA browser icon
 │   ├── apple-icon.png      # 180x180 Apple touch icon
 │   ├── og-image.jpg        # 1200x630 OpenGraph social sharing card
-│   └── placeholder-news.jpg# 800x450 fallback editorial thumbnail
+│   ├── placeholder-news.jpg# 800x450 fallback editorial thumbnail
+│   └── llms.txt            # Machine-readable publication index for AI search (GEO/AEO)
 ├── src/
 │   ├── app/                # Next.js App Router (routes & pages)
 │   │   ├── layout.tsx      # Root layout (fonts, header, ticker, footer, floating call)
@@ -71,8 +77,10 @@ frontend/
 │   │   ├── layout/         # SiteHeader, BreakingNewsTicker, SiteFooter, SearchModal, MobileDrawer
 │   │   └── news/           # FeaturedNewsGrid, FeaturedStoryLead, NewsCard, LatestNewsList, etc.
 │   ├── config/             # Publication config & categories (site.ts)
+│   ├── context/            # Global contexts (LanguageContext.tsx)
 │   ├── data/               # Realistic Hindi mock data for articles & multimedia
-│   ├── lib/                # API client abstraction, date formatting, search utils
+│   ├── lib/                # API client, date formatting, search utils & hooks (useIsMounted.ts)
+│   ├── services/           # Service layer abstraction (newsService.ts)
 │   └── types/              # TypeScript models for articles, categories, authors
 ├── .env.example            # Environment variables template
 ├── next.config.ts          # Turbopack & remote image configurations

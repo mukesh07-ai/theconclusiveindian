@@ -5,6 +5,7 @@ import { SITE_CONFIG } from "@/config/site";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { FloatingCallButton } from "@/components/common/FloatingCallButton";
+import { CookieConsentBanner } from "@/components/common/CookieConsentBanner";
 import { getBreakingNews, getTrendingArticles } from "@/lib/api";
 import { LanguageProvider } from "@/context/LanguageContext";
 
@@ -38,9 +39,13 @@ export const metadata: Metadata = {
     "क्रिकेट",
     "मनोरंजन",
   ],
-  authors: [{ name: SITE_CONFIG.name }],
+  authors: [{ name: SITE_CONFIG.name, url: SITE_CONFIG.url }],
   creator: SITE_CONFIG.name,
+  publisher: SITE_CONFIG.name,
   metadataBase: new URL(SITE_CONFIG.url),
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -69,10 +74,18 @@ export const metadata: Metadata = {
     title: `${SITE_CONFIG.name} - ${SITE_CONFIG.hindiName}`,
     description: SITE_CONFIG.description,
     images: ["/og-image.jpg"],
+    creator: SITE_CONFIG.social.twitterHandle,
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -86,18 +99,86 @@ export default async function RootLayout({
     getTrendingArticles(8),
   ]);
 
+  const globalJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "NewsMediaOrganization",
+        "@id": `${SITE_CONFIG.url}/#organization`,
+        name: SITE_CONFIG.name,
+        alternateName: SITE_CONFIG.hindiName,
+        url: SITE_CONFIG.url,
+        logo: {
+          "@type": "ImageObject",
+          "@id": `${SITE_CONFIG.url}/#logo`,
+          url: `${SITE_CONFIG.url}/logo.png`,
+          caption: SITE_CONFIG.name,
+        },
+        sameAs: [
+          SITE_CONFIG.social.twitter,
+          SITE_CONFIG.social.facebook,
+          SITE_CONFIG.social.instagram,
+          SITE_CONFIG.social.youtube,
+          SITE_CONFIG.social.whatsapp,
+          SITE_CONFIG.social.telegram,
+        ],
+        publishingPrinciples: `${SITE_CONFIG.url}/editorial-policy`,
+        correctionsPolicy: `${SITE_CONFIG.url}/corrections-policy`,
+        diversityPolicy: `${SITE_CONFIG.url}/editorial-policy`,
+        ethicsPolicy: `${SITE_CONFIG.url}/editorial-policy`,
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_CONFIG.url}/#website`,
+        url: SITE_CONFIG.url,
+        name: SITE_CONFIG.name,
+        alternateName: SITE_CONFIG.hindiName,
+        description: SITE_CONFIG.description,
+        publisher: { "@id": `${SITE_CONFIG.url}/#organization` },
+        inLanguage: "hi-IN",
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${SITE_CONFIG.url}/search?q={search_term_string}`,
+          },
+          "query-input": "required name=search_term_string",
+        },
+      },
+    ],
+  };
+
   return (
     <html
       lang="hi"
       suppressHydrationWarning
       className={`${notoSansDevanagari.variable} ${inter.variable} antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(globalJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col bg-white text-[#20242C]">
+        {/* Skip to Main Content Link for Keyboard Accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#E01F26] focus:text-white focus:font-bold focus:rounded-md focus:shadow-lg focus:outline-none"
+        >
+          मुख्य सामग्री पर जाएं (Skip to main content)
+        </a>
+
         <LanguageProvider>
           <SiteHeader breakingNews={breakingNews} trendingArticles={trendingArticles} />
-          <main className="flex-1">{children}</main>
+          <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
+            {children}
+          </main>
           <SiteFooter />
           <FloatingCallButton />
+          <CookieConsentBanner />
         </LanguageProvider>
       </body>
     </html>
