@@ -26,7 +26,7 @@ if config.config_file_name is not None:
 # 3. Dynamic Database URL from environment
 db_url = os.getenv(
     "DATABASE_URL",
-    "mysql+aiomysql://root:MYSQLTEST@127.0.0.1:3306/theconclusiveindian_db?charset=utf8mb4"
+    "mysql+aiomysql://u738606952_theconclusive:Theconclusive%40123@127.0.0.1:3306/u738606952_theconclusive?charset=utf8mb4"
 )
 config.set_main_option("sqlalchemy.url", db_url)
 

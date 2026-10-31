@@ -34,7 +34,7 @@ The backend is decomposed into genuine, decoupled microservices. No microservice
                                       ▼
                 ┌──────────────────────────────────────────────┐
                 │    Centralized MySQL 8.0 Application DB      │
-                │          `theconclusiveindian_db`            │
+                │          `u738606952_theconclusive`            │
                 │   utf8mb4_unicode_ci | Unified Database      │
                 └──────────────────────────────────────────────┘
 ```
@@ -56,7 +56,7 @@ The backend is decomposed into genuine, decoupled microservices. No microservice
 
 ## 🗄️ MySQL Database Architecture & Migrations
 
-All microservices connect to **one centralized MySQL application database**: `theconclusiveindian_db`. Devanagari Hindi text is fully supported using `utf8mb4` with `utf8mb4_unicode_ci` collation.
+All microservices connect to **one centralized MySQL application database**: `u738606952_theconclusive`. Devanagari Hindi text is fully supported using `utf8mb4` with `utf8mb4_unicode_ci` collation.
 
 Database migrations are strictly version-controlled via **Alembic**:
 ```bash

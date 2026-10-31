@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     PORT: int = int(os.getenv("SERVICE_PORT", "8004"))
     DATABASE_URL: str = os.getenv(
         "DATABASE_URL",
-        "mysql+aiomysql://root:MYSQLTEST@127.0.0.1:3306/theconclusiveindian_db?charset=utf8mb4"
+        "mysql+aiomysql://u738606952_theconclusive:Theconclusive%40123@127.0.0.1:3306/u738606952_theconclusive?charset=utf8mb4"
     )
     TAXONOMY_SERVICE_URL: str = os.getenv("TAXONOMY_SERVICE_URL", "http://localhost:8003")
     USER_SERVICE_URL: str = os.getenv("USER_SERVICE_URL", "http://localhost:8002")

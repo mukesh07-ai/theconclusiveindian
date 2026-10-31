@@ -41,7 +41,7 @@ graph TB
     end
 
     subgraph StorageLayer ["MySQL 8.0+ Centralized Application Database"]
-        DB_Unified[("theconclusiveindian_db\n(utf8mb4_unicode_ci)\n(Managed by Alembic)")]
+        DB_Unified[("u738606952_theconclusive\n(utf8mb4_unicode_ci)\n(Managed by Alembic)")]
     end
 
     WebClient -->|HTTP / HTTPS| Gateway

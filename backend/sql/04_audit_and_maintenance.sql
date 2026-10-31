@@ -1,10 +1,10 @@
 -- ==============================================================================
 -- The Conclusive Indian (द कन्क्लूसिव इंडियन)
 -- Database Auditing, Health Checks & Periodic Maintenance Procedures
--- Target Database: theconclusiveindian_db
+-- Target Database: u738606952_theconclusive
 -- ==============================================================================
 
-USE `theconclusiveindian_db`;
+USE `u738606952_theconclusive`;
 
 -- ==============================================================================
 -- 1. DATABASE INTEGRITY & TABLE STATUS INSPECTION
@@ -17,7 +17,7 @@ SELECT
     table_collation AS `Collation`,
     engine AS `Engine`
 FROM information_schema.tables
-WHERE table_schema = 'theconclusiveindian_db'
+WHERE table_schema = 'u738606952_theconclusive'
 ORDER BY table_name ASC;
 
 -- ==============================================================================
@@ -31,7 +31,7 @@ SELECT
     REFERENCED_TABLE_NAME, 
     REFERENCED_COLUMN_NAME
 FROM information_schema.KEY_COLUMN_USAGE
-WHERE TABLE_SCHEMA = 'theconclusiveindian_db' 
+WHERE TABLE_SCHEMA = 'u738606952_theconclusive' 
   AND REFERENCED_TABLE_NAME IS NOT NULL
 ORDER BY TABLE_NAME, CONSTRAINT_NAME;
 
@@ -45,7 +45,7 @@ SELECT
     NON_UNIQUE, 
     GROUP_CONCAT(COLUMN_NAME ORDER BY SEQ_IN_INDEX) AS `Indexed Columns`
 FROM information_schema.STATISTICS
-WHERE TABLE_SCHEMA = 'theconclusiveindian_db' 
+WHERE TABLE_SCHEMA = 'u738606952_theconclusive' 
   AND INDEX_NAME != 'PRIMARY'
 GROUP BY TABLE_NAME, INDEX_NAME, NON_UNIQUE
 ORDER BY TABLE_NAME, INDEX_NAME;
@@ -59,7 +59,7 @@ DELIMITER //
 
 CREATE PROCEDURE IF NOT EXISTS `sp_purge_expired_revoked_tokens`()
 BEGIN
-    DELETE FROM `theconclusiveindian_db`.`revoked_tokens`
+    DELETE FROM `u738606952_theconclusive`.`revoked_tokens`
     WHERE `revoked_at` < DATE_SUB(NOW(), INTERVAL 30 DAY);
     
     SELECT ROW_COUNT() AS `purged_revoked_tokens_count`;
@@ -73,7 +73,7 @@ DELIMITER ;
 -- ==============================================================================
 SELECT 
     COUNT(*) AS `audit_records_older_than_180_days`
-FROM `theconclusiveindian_db`.`audit_logs`
+FROM `u738606952_theconclusive`.`audit_logs`
 WHERE `created_at` < DATE_SUB(NOW(), INTERVAL 180 DAY);
 
 -- ==============================================================================
@@ -87,7 +87,7 @@ SELECT
     category_name, 
     author_name, 
     HEX(LEFT(title, 5)) AS `devanagari_hex_validation`
-FROM `theconclusiveindian_db`.`articles`
+FROM `u738606952_theconclusive`.`articles`
 LIMIT 5;
 
 -- ==============================================================================

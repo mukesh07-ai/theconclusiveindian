@@ -51,7 +51,7 @@ The repository is structured as a decoupled **Polyglot Monorepo**:
                                       ▼
                 ┌──────────────────────────────────────────────┐
                 │    Centralized MySQL 8.0 Application DB      │
-                │          `theconclusiveindian_db`            │
+                │          `u738606952_theconclusive`            │
                 │   utf8mb4_unicode_ci | Unified Database      │
                 └──────────────────────────────────────────────┘
 ```

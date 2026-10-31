@@ -1,18 +1,15 @@
 -- ==============================================================================
 -- The Conclusive Indian (द कन्क्लूसिव इंडियन)
 -- Database Security, User Hardening & Principle of Least Privilege
--- Target Database: theconclusiveindian_db
+-- Target Database: u738606952_theconclusive
 -- ==============================================================================
 
 -- 1. Security Overview:
--- To protect the news portal from unauthorized access, privilege escalation,
--- and SQL injection breach attempts, application services should never connect
--- using the MySQL root account. Instead, a dedicated least-privilege service
--- user (`tci_app_user`) is provisioned with access restricted exclusively to DML
--- operations on `theconclusiveindian_db`.
+-- Dedicated application user credentials for Hostinger:
+-- Database: u738606952_theconclusive
+-- User: u738606952_theconclusive
 
--- 2. Create Dedicated Application Service User
--- Note: Replace 'TCI_Secure_App_Pass_2026!' with production vault secret in live deployments.
+-- 2. Create Dedicated Application Service User (Optional for self-managed MySQL)
 CREATE USER IF NOT EXISTS 'tci_app_user'@'localhost' 
   IDENTIFIED BY 'TCI_Secure_App_Pass_2026!';
 
@@ -23,18 +20,25 @@ CREATE USER IF NOT EXISTS 'tci_app_user'@'%'
   IDENTIFIED BY 'TCI_Secure_App_Pass_2026!';
 
 -- 3. Grant Least-Privilege DML Permissions (SELECT, INSERT, UPDATE, DELETE)
--- Explicitly exclude administrative / destructive DDL privileges (DROP, ALTER, CREATE, GRANT, SUPER)
 GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE 
-  ON `theconclusiveindian_db`.* 
+  ON `u738606952_theconclusive`.* 
   TO 'tci_app_user'@'localhost';
 
 GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE 
-  ON `theconclusiveindian_db`.* 
+  ON `u738606952_theconclusive`.* 
   TO 'tci_app_user'@'127.0.0.1';
 
 GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE 
-  ON `theconclusiveindian_db`.* 
+  ON `u738606952_theconclusive`.* 
   TO 'tci_app_user'@'%';
+
+GRANT ALL PRIVILEGES 
+  ON `u738606952_theconclusive`.* 
+  TO 'u738606952_theconclusive'@'localhost';
+
+GRANT ALL PRIVILEGES 
+  ON `u738606952_theconclusive`.* 
+  TO 'u738606952_theconclusive'@'127.0.0.1';
 
 -- 4. Audit Log Table Immutability Safeguards
 -- Note: Immutability of the `audit_logs` table (preventing UPDATE and DELETE) is

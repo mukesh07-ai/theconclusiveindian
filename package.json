@@ -7,8 +7,8 @@
   ],
   "scripts": {
     "dev": "npm --prefix frontend run dev",
-    "build": "npm --prefix frontend run build",
-    "start": "npm --prefix frontend run start",
+    "build": "npm --prefix frontend run build && node scripts/postbuild.js",
+    "start": "node server.js",
     "lint": "npm --prefix frontend run lint",
     "type-check": "npm --prefix frontend run type-check"
   },

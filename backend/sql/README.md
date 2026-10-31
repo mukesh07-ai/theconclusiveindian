@@ -2,7 +2,7 @@
 
 ## The Conclusive Indian (द कन्क्लूसिव इंडियन)
 **Database Engine**: MySQL 8.0+ / 9.x  
-**Database Name**: `theconclusiveindian_db`  
+**Database Name**: `u738606952_theconclusive`  
 **Character Set**: `utf8mb4`  
 **Collation**: `utf8mb4_unicode_ci` (Full Devanagari Hindi Unicode Support)
 
@@ -10,7 +10,7 @@
 
 ## 1. Single Database Architecture Rationale
 
-The entire platform consolidates all relational data into a single, highly-optimized MySQL database (`theconclusiveindian_db`).
+The entire platform consolidates all relational data into a single, highly-optimized MySQL database (`u738606952_theconclusive`).
 
 ### Key Benefits over Multiple Fragmented Databases:
 1. **Relational Integrity & ACID Guarantees**: Allows strict foreign key constraints between articles, categories, authors, and users without fragile cross-database joins or distributed two-phase commit overhead.

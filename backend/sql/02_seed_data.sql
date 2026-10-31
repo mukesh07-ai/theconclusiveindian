@@ -1,10 +1,10 @@
 -- ==============================================================================
 -- The Conclusive Indian (द कन्क्लूसिव इंडियन)
 -- Production Seed Data (Single Database Architecture)
--- Database: theconclusiveindian_db
+-- Database: u738606952_theconclusive
 -- ==============================================================================
 
-USE `theconclusiveindian_db`;
+USE `u738606952_theconclusive`;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 

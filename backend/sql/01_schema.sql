@@ -1,7 +1,7 @@
 -- ==============================================================================
 -- The Conclusive Indian (द कन्क्लूसिव इंडियन)
 -- Unified Database Schema Definition (Single Database Architecture)
--- Database: theconclusiveindian_db
+-- Database: u738606952_theconclusive
 -- Collation: utf8mb4_unicode_ci (Full Devanagari Hindi Unicode Support)
 -- ==============================================================================
 
@@ -9,11 +9,11 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- 1. Create Consolidated Database
-CREATE DATABASE IF NOT EXISTS `theconclusiveindian_db`
+CREATE DATABASE IF NOT EXISTS `u738606952_theconclusive`
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
-USE `theconclusiveindian_db`;
+USE `u738606952_theconclusive`;
 
 -- ==============================================================================
 -- SECTION A: IDENTITY & ACCESS MANAGEMENT (RBAC)

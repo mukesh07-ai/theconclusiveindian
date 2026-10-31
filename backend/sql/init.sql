@@ -1,7 +1,7 @@
 -- ==============================================================================
 -- The Conclusive Indian (द कन्क्लूसिव इंडियन)
 -- Unified Database Schema Definition (Single Database Architecture)
--- Database: theconclusiveindian_db
+-- Database: u738606952_theconclusive
 -- Collation: utf8mb4_unicode_ci (Full Devanagari Hindi Unicode Support)
 -- ==============================================================================
 
@@ -9,11 +9,11 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- 1. Create Consolidated Database
-CREATE DATABASE IF NOT EXISTS `theconclusiveindian_db`
+CREATE DATABASE IF NOT EXISTS `u738606952_theconclusive`
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
-USE `theconclusiveindian_db`;
+USE `u738606952_theconclusive`;
 
 -- ==============================================================================
 -- SECTION A: IDENTITY & ACCESS MANAGEMENT (RBAC)
@@ -400,10 +400,10 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- ==============================================================================
 -- The Conclusive Indian (द कन्क्लूसिव इंडियन)
 -- Production Seed Data (Single Database Architecture)
--- Database: theconclusiveindian_db
+-- Database: u738606952_theconclusive
 -- ==============================================================================
 
-USE `theconclusiveindian_db`;
+USE `u738606952_theconclusive`;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -548,7 +548,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- ==============================================================================
 -- The Conclusive Indian (द कन्क्लूसिव इंडियन)
 -- Database Security, User Hardening & Principle of Least Privilege
--- Target Database: theconclusiveindian_db
+-- Target Database: u738606952_theconclusive
 -- ==============================================================================
 
 -- 1. Security Overview:
@@ -556,7 +556,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- and SQL injection breach attempts, application services should never connect
 -- using the MySQL root account. Instead, a dedicated least-privilege service
 -- user (`tci_app_user`) is provisioned with access restricted exclusively to DML
--- operations on `theconclusiveindian_db`.
+-- operations on `u738606952_theconclusive`.
 
 -- 2. Create Dedicated Application Service User
 -- Note: Replace 'TCI_Secure_App_Pass_2026!' with production vault secret in live deployments.
@@ -572,15 +572,15 @@ CREATE USER IF NOT EXISTS 'tci_app_user'@'%'
 -- 3. Grant Least-Privilege DML Permissions (SELECT, INSERT, UPDATE, DELETE)
 -- Explicitly exclude administrative / destructive DDL privileges (DROP, ALTER, CREATE, GRANT, SUPER)
 GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE 
-  ON `theconclusiveindian_db`.* 
+  ON `u738606952_theconclusive`.* 
   TO 'tci_app_user'@'localhost';
 
 GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE 
-  ON `theconclusiveindian_db`.* 
+  ON `u738606952_theconclusive`.* 
   TO 'tci_app_user'@'127.0.0.1';
 
 GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE 
-  ON `theconclusiveindian_db`.* 
+  ON `u738606952_theconclusive`.* 
   TO 'tci_app_user'@'%';
 
 -- 4. Audit Log Table Immutability Safeguards

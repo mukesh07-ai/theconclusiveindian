@@ -56,7 +56,7 @@ services:
     container_name: tci_identity_service
     environment:
       - SERVICE_PORT=8001
-      - DATABASE_URL=mysql+aiomysql://root:root_password_local@mysql:3306/theconclusiveindian_db?charset=utf8mb4
+      - DATABASE_URL=mysql+aiomysql://root:root_password_local@mysql:3306/u738606952_theconclusive?charset=utf8mb4
       - JWT_SECRET_KEY=theconclusiveindian-dev-secret-key-change-in-production-2026
     depends_on:
       mysql:
@@ -71,7 +71,7 @@ services:
     container_name: tci_user_service
     environment:
       - SERVICE_PORT=8002
-      - DATABASE_URL=mysql+aiomysql://root:root_password_local@mysql:3306/theconclusiveindian_db?charset=utf8mb4
+      - DATABASE_URL=mysql+aiomysql://root:root_password_local@mysql:3306/u738606952_theconclusive?charset=utf8mb4
     depends_on:
       mysql:
         condition: service_healthy
@@ -85,7 +85,7 @@ services:
     container_name: tci_taxonomy_service
     environment:
       - SERVICE_PORT=8003
-      - DATABASE_URL=mysql+aiomysql://root:root_password_local@mysql:3306/theconclusiveindian_db?charset=utf8mb4
+      - DATABASE_URL=mysql+aiomysql://root:root_password_local@mysql:3306/u738606952_theconclusive?charset=utf8mb4
     depends_on:
       mysql:
         condition: service_healthy
@@ -99,7 +99,7 @@ services:
     container_name: tci_content_service
     environment:
       - SERVICE_PORT=8004
-      - DATABASE_URL=mysql+aiomysql://root:root_password_local@mysql:3306/theconclusiveindian_db?charset=utf8mb4
+      - DATABASE_URL=mysql+aiomysql://root:root_password_local@mysql:3306/u738606952_theconclusive?charset=utf8mb4
       - TAXONOMY_SERVICE_URL=http://taxonomy-service:8003
       - USER_SERVICE_URL=http://user-service:8002
     depends_on:
@@ -115,7 +115,7 @@ services:
     container_name: tci_page_builder_service
     environment:
       - SERVICE_PORT=8005
-      - DATABASE_URL=mysql+aiomysql://root:root_password_local@mysql:3306/theconclusiveindian_db?charset=utf8mb4
+      - DATABASE_URL=mysql+aiomysql://root:root_password_local@mysql:3306/u738606952_theconclusive?charset=utf8mb4
     depends_on:
       mysql:
         condition: service_healthy
@@ -129,7 +129,7 @@ services:
     container_name: tci_media_service
     environment:
       - SERVICE_PORT=8006
-      - DATABASE_URL=mysql+aiomysql://root:root_password_local@mysql:3306/theconclusiveindian_db?charset=utf8mb4
+      - DATABASE_URL=mysql+aiomysql://root:root_password_local@mysql:3306/u738606952_theconclusive?charset=utf8mb4
       - MEDIA_UPLOAD_DIR=/app/uploads
     volumes:
       - tci_media_storage:/app/uploads
@@ -146,7 +146,7 @@ services:
     container_name: tci_contact_service
     environment:
       - SERVICE_PORT=8007
-      - DATABASE_URL=mysql+aiomysql://root:root_password_local@mysql:3306/theconclusiveindian_db?charset=utf8mb4
+      - DATABASE_URL=mysql+aiomysql://root:root_password_local@mysql:3306/u738606952_theconclusive?charset=utf8mb4
     depends_on:
       mysql:
         condition: service_healthy

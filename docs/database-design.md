@@ -1,6 +1,6 @@
 # Centralized Database Architecture & Schema Specification (MySQL 8.0+)
 
-**The Conclusive Indian (द कन्क्लूसिव इंडियन)** uses **one centralized MySQL application database** (`theconclusiveindian_db`) for the entire platform.
+**The Conclusive Indian (द कन्क्लूसिव इंडियन)** uses **one centralized MySQL application database** (`u738606952_theconclusive`) for the entire platform.
 
 All tables are strictly configured with:
 - **Character Set:** `utf8mb4`
