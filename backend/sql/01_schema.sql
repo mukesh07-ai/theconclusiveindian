@@ -34,6 +34,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   `hashed_password` VARCHAR(255) NOT NULL,
   `full_name` VARCHAR(255) NOT NULL,
   `is_active` TINYINT(1) NOT NULL DEFAULT 1,
+  `must_change_password` TINYINT(1) NOT NULL DEFAULT 0,
+  `failed_login_attempts` INT NOT NULL DEFAULT 0,
+  `locked_until` DATETIME NULL,
+  `permissions_json` TEXT NULL,
+  `last_login_at` DATETIME NULL,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -147,6 +152,18 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `status` VARCHAR(50) NOT NULL DEFAULT 'published',
   `tags_csv` TEXT NULL,
   
+  -- Editorial Workflow & SEO Extensions
+  `editorial_notes` TEXT NULL,
+  `approved_by` VARCHAR(36) NULL,
+  `approved_at` DATETIME NULL,
+  `submitted_at` DATETIME NULL,
+  `seo_title` VARCHAR(500) NULL,
+  `meta_description` TEXT NULL,
+  `focus_keyword` VARCHAR(255) NULL,
+  `canonical_url` VARCHAR(1000) NULL,
+  `og_image` VARCHAR(1000) NULL,
+  `no_index` TINYINT(1) NOT NULL DEFAULT 0,
+
   -- Flags & Metrics
   `is_breaking` TINYINT(1) NOT NULL DEFAULT 0,
   `is_featured` TINYINT(1) NOT NULL DEFAULT 0,
@@ -344,6 +361,43 @@ CREATE TABLE IF NOT EXISTS `contact_submissions` (
   UNIQUE KEY `uq_contact_ticket_id` (`ticket_id`),
   KEY `idx_contact_status` (`status`, `created_at` DESC),
   KEY `idx_contact_category` (`category`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ==============================================================================
+-- SECTION G2: ADVERTISEMENT MANAGEMENT & CAMPAIGNS
+-- ==============================================================================
+
+CREATE TABLE IF NOT EXISTS `advertisements` (
+  `id` VARCHAR(50) NOT NULL,
+  `title` VARCHAR(255) NOT NULL,
+  `advertiser_name` VARCHAR(255) NOT NULL,
+  `destination_url` VARCHAR(1000) NOT NULL,
+  `creative_desktop_url` VARCHAR(1000) NOT NULL,
+  `creative_mobile_url` VARCHAR(1000) NULL,
+  `placement_positions` VARCHAR(500) NOT NULL,
+  `ad_type` VARCHAR(50) NOT NULL DEFAULT 'image_banner',
+  `start_date` DATETIME NULL,
+  `end_date` DATETIME NULL,
+  `priority` INT NOT NULL DEFAULT 1,
+  `is_active` TINYINT(1) NOT NULL DEFAULT 1,
+  `impressions_count` INT NOT NULL DEFAULT 0,
+  `clicks_count` INT NOT NULL DEFAULT 0,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_ads_is_active` (`is_active`),
+  KEY `idx_ads_priority` (`priority` DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- URL 301 Redirects Table
+CREATE TABLE IF NOT EXISTS `url_redirects` (
+  `id` VARCHAR(50) NOT NULL,
+  `source_path` VARCHAR(500) NOT NULL,
+  `target_path` VARCHAR(500) NOT NULL,
+  `status_code` INT NOT NULL DEFAULT 301,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_url_redirects_source` (`source_path`(255))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ==============================================================================

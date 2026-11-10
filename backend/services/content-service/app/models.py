@@ -28,8 +28,19 @@ class Article(Base):
     author_role = Column(String(255), nullable=True)
     author_avatar = Column(String(1000), nullable=True)
 
-    status = Column(String(50), default="published", index=True) # draft, review, scheduled, published, archived
+    status = Column(String(50), default="published", index=True) # draft, review, approved, scheduled, published, archived
     tags_csv = Column(Text, nullable=True) # comma-separated tags
+
+    editorial_notes = Column(Text, nullable=True)
+    approved_by = Column(String(36), nullable=True)
+    approved_at = Column(DateTime, nullable=True)
+    submitted_at = Column(DateTime, nullable=True)
+    seo_title = Column(String(500), nullable=True)
+    meta_description = Column(Text, nullable=True)
+    focus_keyword = Column(String(255), nullable=True)
+    canonical_url = Column(String(1000), nullable=True)
+    og_image = Column(String(1000), nullable=True)
+    no_index = Column(Boolean, default=False)
 
     is_breaking = Column(Boolean, default=False)
     is_featured = Column(Boolean, default=False)

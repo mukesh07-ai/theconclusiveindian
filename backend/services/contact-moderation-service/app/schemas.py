@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Dict, Any
 from datetime import datetime
 from pydantic import BaseModel, EmailStr
 
@@ -32,3 +32,24 @@ class ContactSubmissionDTO(BaseModel):
 class ContactStatusUpdateRequest(BaseModel):
     status: str
     internalNotes: Optional[str] = None
+
+class AuditLogDTO(BaseModel):
+    id: int
+    userId: Optional[str] = None
+    userEmail: Optional[str] = None
+    action: str
+    resourceType: str
+    resourceId: Optional[str] = None
+    details: Optional[Dict[str, Any]] = None
+    ipAddress: Optional[str] = None
+    createdAt: str
+
+class AuditLogCreate(BaseModel):
+    userId: Optional[str] = None
+    userEmail: Optional[str] = None
+    action: str
+    resourceType: str
+    resourceId: Optional[str] = None
+    details: Optional[Dict[str, Any]] = None
+    ipAddress: Optional[str] = None
+    userAgent: Optional[str] = None

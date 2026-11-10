@@ -40,6 +40,16 @@ class ArticleResponse(BaseModel):
     viewCount: int = 0
     readTimeMinutes: int = 4
     scheduledAt: Optional[str] = None
+    editorialNotes: Optional[str] = None
+    approvedBy: Optional[str] = None
+    approvedAt: Optional[str] = None
+    submittedAt: Optional[str] = None
+    seoTitle: Optional[str] = None
+    metaDescription: Optional[str] = None
+    focusKeyword: Optional[str] = None
+    canonicalUrl: Optional[str] = None
+    ogImage: Optional[str] = None
+    noIndex: bool = False
 
 class ArticleCreate(BaseModel):
     title: str
@@ -64,6 +74,13 @@ class ArticleCreate(BaseModel):
     is_trending: Optional[bool] = False
     read_time_minutes: Optional[int] = 4
     scheduled_at: Optional[datetime] = None
+    editorial_notes: Optional[str] = None
+    seo_title: Optional[str] = None
+    meta_description: Optional[str] = None
+    focus_keyword: Optional[str] = None
+    canonical_url: Optional[str] = None
+    og_image: Optional[str] = None
+    no_index: Optional[bool] = False
 
 class ArticleUpdate(BaseModel):
     title: Optional[str] = None
@@ -79,6 +96,8 @@ class ArticleUpdate(BaseModel):
     category_name: Optional[str] = None
     author_slug: Optional[str] = None
     author_name: Optional[str] = None
+    author_role: Optional[str] = None
+    author_avatar: Optional[str] = None
     tags: Optional[List[str]] = None
     status: Optional[str] = None
     is_breaking: Optional[bool] = None
@@ -86,9 +105,18 @@ class ArticleUpdate(BaseModel):
     is_trending: Optional[bool] = None
     read_time_minutes: Optional[int] = None
     scheduled_at: Optional[datetime] = None
+    editorial_notes: Optional[str] = None
+    seo_title: Optional[str] = None
+    meta_description: Optional[str] = None
+    focus_keyword: Optional[str] = None
+    canonical_url: Optional[str] = None
+    og_image: Optional[str] = None
+    no_index: Optional[bool] = None
 
 class ArticleStatusUpdate(BaseModel):
-    status: str # draft, review, scheduled, published, archived
+    status: str # draft, review, approved, scheduled, published, archived
+    editorial_notes: Optional[str] = None
+    approved_by: Optional[str] = None
 
 class BreakingNewsItem(BaseModel):
     id: str

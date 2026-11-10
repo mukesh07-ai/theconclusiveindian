@@ -126,7 +126,25 @@ async def route_pages(request: Request, path: str = ""):
     subpath = f"{prefix}/{path}" if path else prefix
     return await forward_request(settings.PAGE_BUILDER_SERVICE_URL, request, subpath)
 
-# 6. Media Routes
+# 6. Advertisements & Redirects
+@app.api_route("/api/v1/ads", methods=["GET"])
+@app.api_route("/api/v1/ads/{path:path}", methods=["GET", "POST"])
+@app.api_route("/api/v1/admin/ads", methods=["GET", "POST"])
+@app.api_route("/api/v1/admin/ads/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+async def route_ads(request: Request, path: str = ""):
+    prefix = "api/v1/admin/ads" if "admin" in request.url.path else "api/v1/ads"
+    subpath = f"{prefix}/{path}" if path else prefix
+    return await forward_request(settings.PAGE_BUILDER_SERVICE_URL, request, subpath)
+
+@app.api_route("/api/v1/redirects/{path:path}", methods=["GET"])
+@app.api_route("/api/v1/admin/redirects", methods=["GET", "POST"])
+@app.api_route("/api/v1/admin/redirects/{path:path}", methods=["GET", "DELETE"])
+async def route_redirects(request: Request, path: str = ""):
+    prefix = "api/v1/admin/redirects" if "admin" in request.url.path else "api/v1/redirects"
+    subpath = f"{prefix}/{path}" if path else prefix
+    return await forward_request(settings.PAGE_BUILDER_SERVICE_URL, request, subpath)
+
+# 7. Media Routes
 @app.api_route("/api/v1/media/upload", methods=["POST"])
 @app.api_route("/api/v1/media", methods=["GET"])
 @app.api_route("/api/v1/media/{path:path}", methods=["GET"])
@@ -140,12 +158,16 @@ async def route_media(request: Request, path: str = ""):
         subpath = f"api/v1/media/{path}" if path else "api/v1/media"
     return await forward_request(settings.MEDIA_SERVICE_URL, request, subpath)
 
-# 7. Contact & Moderation Routes
+# 8. Contact & Audit Routes
 @app.api_route("/api/v1/contact/feedback", methods=["POST"])
 @app.api_route("/api/v1/admin/contact/feedback", methods=["GET"])
 @app.api_route("/api/v1/admin/contact/feedback/{path:path}", methods=["GET", "PATCH", "DELETE"])
-async def route_contact(request: Request, path: str = ""):
-    if "admin" in request.url.path:
+@app.api_route("/api/v1/admin/audit-logs", methods=["GET", "POST"])
+@app.api_route("/api/v1/admin/audit-logs/{path:path}", methods=["GET", "POST"])
+async def route_contact_and_audit(request: Request, path: str = ""):
+    if "audit-logs" in request.url.path:
+        subpath = f"api/v1/admin/audit-logs/{path}" if path else "api/v1/admin/audit-logs"
+    elif "admin" in request.url.path:
         subpath = f"api/v1/admin/contact/feedback/{path}" if path else "api/v1/admin/contact/feedback"
     else:
         subpath = "api/v1/contact/feedback"

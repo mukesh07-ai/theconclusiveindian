@@ -66,7 +66,17 @@ def article_to_response(a: Article) -> ArticleResponse:
         isTrending=a.is_trending,
         viewCount=a.view_count or 0,
         readTimeMinutes=a.read_time_minutes or 4,
-        scheduledAt=a.scheduled_at.isoformat() if a.scheduled_at else None
+        scheduledAt=a.scheduled_at.isoformat() if a.scheduled_at else None,
+        editorialNotes=a.editorial_notes,
+        approvedBy=a.approved_by,
+        approvedAt=a.approved_at.isoformat() if a.approved_at else None,
+        submittedAt=a.submitted_at.isoformat() if a.submitted_at else None,
+        seoTitle=a.seo_title,
+        metaDescription=a.meta_description,
+        focusKeyword=a.focus_keyword,
+        canonicalUrl=a.canonical_url,
+        ogImage=a.og_image,
+        noIndex=bool(a.no_index)
     )
 
 # --- Articles Endpoints ---
@@ -85,7 +95,7 @@ async def list_articles(
     query = select(Article)
 
     # In public queries, only show published articles unless explicitly requested by admin
-    if status_filter:
+    if status_filter and status_filter.lower() != "all":
         query = query.where(Article.status == status_filter)
 
     if category:
@@ -278,7 +288,15 @@ async def create_article(req: ArticleCreate, db: AsyncSession = Depends(get_db))
         is_trending=req.is_trending or False,
         read_time_minutes=req.read_time_minutes or 4,
         scheduled_at=req.scheduled_at,
-        published_at=datetime.utcnow() if req.status == "published" else None
+        published_at=datetime.utcnow() if req.status == "published" else None,
+        submitted_at=datetime.utcnow() if req.status == "review" else None,
+        editorial_notes=req.editorial_notes,
+        seo_title=req.seo_title,
+        meta_description=req.meta_description,
+        focus_keyword=req.focus_keyword,
+        canonical_url=req.canonical_url,
+        og_image=req.og_image,
+        no_index=req.no_index or False
     )
     db.add(new_article)
     await db.flush()
@@ -343,6 +361,22 @@ async def update_article(article_id: str, req: ArticleUpdate, db: AsyncSession =
         art.status = req.status
         if req.status == "published" and not art.published_at:
             art.published_at = datetime.utcnow()
+        elif req.status == "review" and not art.submitted_at:
+            art.submitted_at = datetime.utcnow()
+    if req.editorial_notes is not None:
+        art.editorial_notes = req.editorial_notes
+    if req.seo_title is not None:
+        art.seo_title = req.seo_title
+    if req.meta_description is not None:
+        art.meta_description = req.meta_description
+    if req.focus_keyword is not None:
+        art.focus_keyword = req.focus_keyword
+    if req.canonical_url is not None:
+        art.canonical_url = req.canonical_url
+    if req.og_image is not None:
+        art.og_image = req.og_image
+    if req.no_index is not None:
+        art.no_index = req.no_index
     if req.is_breaking is not None:
         art.is_breaking = req.is_breaking
     if req.is_featured is not None:
@@ -368,6 +402,15 @@ async def update_article_status(article_id: str, req: ArticleStatusUpdate, db: A
     art.status = req.status
     if req.status == "published" and not art.published_at:
         art.published_at = datetime.utcnow()
+    elif req.status == "review":
+        art.submitted_at = datetime.utcnow()
+    elif req.status == "approved":
+        art.approved_at = datetime.utcnow()
+        if req.approved_by:
+            art.approved_by = req.approved_by
+
+    if req.editorial_notes is not None:
+        art.editorial_notes = req.editorial_notes
 
     await db.commit()
     await db.refresh(art)

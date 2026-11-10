@@ -7,6 +7,9 @@ export interface AdminUser {
   email: string;
   full_name: string;
   roles: string[];
+  must_change_password?: boolean;
+  permissions?: string[];
+  last_login_at?: string;
 }
 
 interface AdminAuthContextType {
@@ -14,9 +17,11 @@ interface AdminAuthContextType {
   token: string | null;
   isLoading: boolean;
   login: (token: string, user: AdminUser) => void;
+  updateUser: (userUpdates: Partial<AdminUser>) => void;
   logout: () => void;
   isAuthenticated: boolean;
   hasRole: (role: string) => boolean;
+  hasPermission: (permission: string) => boolean;
 }
 
 const AdminAuthContext = createContext<AdminAuthContextType | undefined>(undefined);
@@ -58,6 +63,17 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const updateUser = (userUpdates: Partial<AdminUser>) => {
+    if (!user) return;
+    const updated = { ...user, ...userUpdates };
+    setUser(updated);
+    try {
+      localStorage.setItem(USER_KEY, JSON.stringify(updated));
+    } catch {
+      // Ignore storage errors
+    }
+  };
+
   const logout = () => {
     setToken(null);
     setUser(null);
@@ -74,6 +90,13 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
     return user.roles.includes("super_admin") || user.roles.includes(role);
   };
 
+  const hasPermission = (permission: string) => {
+    if (!user) return false;
+    if (user.roles?.includes("super_admin")) return true;
+    if (user.permissions?.includes(permission) || user.permissions?.includes("*")) return true;
+    return false;
+  };
+
   return (
     <AdminAuthContext.Provider
       value={{
@@ -81,9 +104,11 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
         token,
         isLoading,
         login,
+        updateUser,
         logout,
         isAuthenticated: !!token && !!user,
         hasRole,
+        hasPermission,
       }}
     >
       {children}

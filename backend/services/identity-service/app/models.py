@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from sqlalchemy import Column, String, Boolean, DateTime, Table, ForeignKey
+from sqlalchemy import Column, String, Boolean, DateTime, Table, ForeignKey, Integer, Text
 from sqlalchemy.orm import relationship
 try:
     from shared.db import Base
@@ -22,6 +22,11 @@ class User(Base):
     hashed_password = Column(String(255), nullable=False)
     full_name = Column(String(255), nullable=False)
     is_active = Column(Boolean, default=True)
+    must_change_password = Column(Boolean, default=False)
+    failed_login_attempts = Column(Integer, default=0)
+    locked_until = Column(DateTime, nullable=True)
+    permissions_json = Column(Text, nullable=True) # JSON string of custom permissions
+    last_login_at = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 

@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_Devanagari, Inter } from "next/font/google";
 import "./globals.css";
 import { SITE_CONFIG } from "@/config/site";
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { SiteFooter } from "@/components/layout/SiteFooter";
-import { FloatingCallButton } from "@/components/common/FloatingCallButton";
-import { CookieConsentBanner } from "@/components/common/CookieConsentBanner";
+import { PublicSiteWrapper } from "@/components/layout/PublicSiteWrapper";
 import { getBreakingNews, getTrendingArticles } from "@/lib/api";
 import { LanguageProvider } from "@/context/LanguageContext";
 
@@ -163,22 +160,13 @@ export default async function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-white text-[#20242C]">
-        {/* Skip to Main Content Link for Keyboard Accessibility */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#E01F26] focus:text-white focus:font-bold focus:rounded-md focus:shadow-lg focus:outline-none"
-        >
-          मुख्य सामग्री पर जाएं (Skip to main content)
-        </a>
-
         <LanguageProvider>
-          <SiteHeader breakingNews={breakingNews} trendingArticles={trendingArticles} />
-          <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
+          <PublicSiteWrapper
+            breakingNews={breakingNews}
+            trendingArticles={trendingArticles}
+          >
             {children}
-          </main>
-          <SiteFooter />
-          <FloatingCallButton />
-          <CookieConsentBanner />
+          </PublicSiteWrapper>
         </LanguageProvider>
       </body>
     </html>

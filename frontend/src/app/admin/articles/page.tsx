@@ -147,9 +147,11 @@ export default function AdminArticlesPage() {
           {[
             { id: "all", label: "सभी (All)" },
             { id: "published", label: "प्रकाशित (Published)" },
+            { id: "review", label: "समीक्षाधीन (Review)" },
+            { id: "approved", label: "अनुमोदित (Approved)" },
             { id: "draft", label: "ड्राफ्ट (Draft)" },
             { id: "scheduled", label: "शेड्यूल (Scheduled)" },
-            { id: "review", label: "समीक्षाधीन (Review)" },
+            { id: "archived", label: "आर्काइव (Archived)" },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -286,9 +288,10 @@ export default function AdminArticlesPage() {
                             : "text-amber-400 border-amber-500/30"
                         }`}
                       >
-                        <option value="published">प्रकाशित</option>
+                        <option value="published">प्रकाशित (Live)</option>
                         <option value="draft">ड्राफ्ट</option>
-                        <option value="review">समीक्षाधीन</option>
+                        <option value="review">समीक्षाधीन (Review)</option>
+                        <option value="approved">अनुमोदित (Approved)</option>
                         <option value="scheduled">शेड्यूल</option>
                         <option value="archived">आर्काइव</option>
                       </select>

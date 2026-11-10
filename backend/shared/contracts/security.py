@@ -56,3 +56,24 @@ def decode_access_token(
         return TokenPayload(**payload)
     except JWTError:
         return None
+
+def has_permission(user_roles: List[str], user_permissions: List[str], required_permission: str) -> bool:
+    if "super_admin" in user_roles:
+        return True
+    if required_permission in user_permissions:
+        return True
+    role_permissions_map = {
+        "admin": ["articles:*", "pages:*", "categories:*", "ads:*", "users:view", "users:edit", "media:*"],
+        "editor": ["articles:*", "media:*", "categories:view"],
+        "reporter": ["articles:create", "articles:edit_own", "media:upload", "media:view"],
+        "advertisement_manager": ["ads:*", "media:*"],
+        "staff": ["articles:create", "media:upload"]
+    }
+    for role in user_roles:
+        perms = role_permissions_map.get(role, [])
+        for p in perms:
+            if p == required_permission or p == "*":
+                return True
+            if p.endswith(":*") and required_permission.startswith(p[:-2]):
+                return True
+    return False

@@ -1,11 +1,29 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { adminService } from "@/services/adminService";
+import { ExternalLink } from "lucide-react";
 
 interface AdPlaceholderProps {
   format: "leaderboard" | "sidebar" | "in-feed";
+  placement?: string;
   className?: string;
 }
 
-export function AdPlaceholder({ format, className }: AdPlaceholderProps) {
+interface ActiveAd {
+  id: string;
+  title: string;
+  advertiserName: string;
+  destinationUrl: string;
+  creativeDesktopUrl: string;
+  creativeMobileUrl?: string;
+}
+
+export function AdPlaceholder({ format, placement, className }: AdPlaceholderProps) {
+  const [ad, setAd] = useState<ActiveAd | null>(null);
+
   const formatConfig = {
     leaderboard: {
       dimensions: "728 × 90 px (Leaderboard)",
@@ -22,6 +40,58 @@ export function AdPlaceholder({ format, className }: AdPlaceholderProps) {
   };
 
   const current = formatConfig[format];
+  const targetPlacement = placement || (format === "leaderboard" ? "homepage_top" : format === "sidebar" ? "sidebar" : "article_inline");
+
+  useEffect(() => {
+    let isMounted = true;
+    async function fetchAd() {
+      try {
+        const ads = await adminService.getActiveAdsForPlacement(targetPlacement);
+        if (isMounted && Array.isArray(ads) && ads.length > 0) {
+          const selected = ads[0];
+          setAd(selected);
+          adminService.trackAdImpression(selected.id);
+        }
+      } catch {
+        // Fallback to placeholder
+      }
+    }
+    fetchAd();
+    return () => {
+      isMounted = false;
+    };
+  }, [targetPlacement]);
+
+  if (ad) {
+    return (
+      <div
+        className={cn(
+          "relative overflow-hidden rounded shadow-sm border border-gray-200 group transition-all",
+          current.containerClass,
+          className
+        )}
+      >
+        <span className="absolute top-1 right-1 z-10 text-[9px] uppercase tracking-wider bg-black/60 text-white px-1 rounded backdrop-blur-xs font-semibold">
+          विज्ञापन
+        </span>
+        <a
+          href={ad.destinationUrl}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          className="block w-full h-full relative"
+          title={`${ad.title} - ${ad.advertiserName}`}
+        >
+          <Image
+            src={ad.creativeDesktopUrl}
+            alt={ad.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 728px"
+            className="object-cover group-hover:opacity-95 transition-opacity"
+          />
+        </a>
+      </div>
+    );
+  }
 
   return (
     <div
